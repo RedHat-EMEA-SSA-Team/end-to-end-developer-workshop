@@ -1,13 +1,14 @@
+apiVersion: 1.0.0
 metadata:
-  name: wksp-cloud-native
+  name: wksp-end-to-end-dev
 attributes:
   extensions.ignoreRecommendations: 'true'
 projects:
   - name: workshop
     source:
-      location: 'https://github.com/mcouliba/cloud-native-workshop.git'
+      location: 'https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git'
       type: github
-      branch: '5.1'
+      branch: '6.0'
 components:
   - type: chePlugin
     id: redhat/java11/latest
@@ -15,7 +16,7 @@ components:
       java.server.launchMode: Standard
       java.autobuild.enabled: false
   - type: dockerimage
-    image: 'quay.io/mcouliba/workshop-tools:5.0'
+    image: 'quay.io/mcouliba/workshop-tools:6.0'
     alias: workshop-tools
     memoryLimit: "3072M"
     mountSources: true
@@ -41,7 +42,6 @@ components:
     volumes:
       - name: kubefolder
         containerPath: /home/developer/.kube
-apiVersion: 1.0.0
 commands:
   - name: 'OpenShift - Login'
     actions:

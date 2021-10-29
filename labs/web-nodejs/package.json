@@ -39,12 +39,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mcouliba/cloud-native-workshop.git"
+    "url": "git+https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git"
   },
   "bugs": {
-    "url": "https://github.com/mcouliba/cloud-native-workshop/issues"
+    "url": "https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/issues"
   },
-  "homepage": "https://github.com/mcouliba/cloud-native-workshop#readme",
+  "homepage": "https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop#readme",
   "devDependencies": {
     "js-yaml": "~3.13.1",
     "nodeshift": "~3.0.0",
