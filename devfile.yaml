@@ -2,6 +2,7 @@ apiVersion: 1.0.0
 metadata:
   name: wksp-end-to-end-dev
 attributes:
+  security.workspace.trust: 'false'
   extensions.ignoreRecommendations: 'true'
 projects:
   - name: workshop
@@ -16,7 +17,7 @@ components:
       java.server.launchMode: Standard
       java.autobuild.enabled: false
   - type: dockerimage
-    image: 'quay.io/mcouliba/workshop-tools:6.0'
+    image: 'quay.io/redhat-emea-ssa-team/workshop-tools:6.0'
     alias: workshop-tools
     memoryLimit: "3072M"
     mountSources: true
