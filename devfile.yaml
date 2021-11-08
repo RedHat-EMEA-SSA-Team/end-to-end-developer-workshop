@@ -15,7 +15,7 @@ components:
       java.server.launchMode: Standard
       java.autobuild.enabled: false
   - type: dockerimage
-    image: 'quay.io/redhat-emea-ssa-team/workshop-tools:5.1'
+    image: 'quay.io/redhat-emea-ssa-team/workshop-tools:5.0'
     alias: workshop-tools
     memoryLimit: "3072M"
     mountSources: true
