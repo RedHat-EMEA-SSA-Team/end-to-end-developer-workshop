@@ -26,8 +26,8 @@ An [Operator](https://docs.openshift.com/container-platform/4.2/operators/olm-wh
 is provided for deploying the workshop infrastructure (lab instructions, Nexus, Gitea, Eclipse Che, etc)
 on OpenShift.
 
-Please follow the instructions from [OpenShift Workshop Operator](https://github.com/mcouliba/openshift-workshop-operator)
-and deploy the following **Workshop** custom resource [cloud_native_workshop_cr.yaml](https://github.com/mcouliba/openshift-workshop-operator/blob/master/deploy/crds/cloud_native_workshop_cr.yaml)
+Please follow the instructions from [OpenShift Workshop Operator](https://github.com/RedHat-EMEA-SSA-Team/openshift-workshop-operator)
+and deploy the following **Workshop** custom resource [cloud_native_workshop_cr.yaml](https://github.com/RedHat-EMEA-SSA-Team/openshift-workshop-operator/blob/master/deploy/crds/cloud_native_workshop_cr.yaml)
 
 ## Run locally the lab instructions
 
@@ -35,7 +35,7 @@ In order to run the guide locally, please follow the instructions below:
 
 ```
 $ git clone
-$ cd cloud-native-workshop/guide
+$ cd end-to-end-developer-workshop/guide
 $ docker run -it --rm -p 8080:8080 \
       -v $(pwd):/app-data \
       -e LOG_TO_STDOUT#true \

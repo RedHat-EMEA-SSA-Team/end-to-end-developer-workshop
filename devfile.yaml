@@ -5,7 +5,7 @@ attributes:
 projects:
   - name: workshop
     source:
-      location: 'https://github.com/mcouliba/cloud-native-workshop.git'
+      location: 'https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git'
       type: github
       branch: '5.1'
 components:
@@ -15,7 +15,7 @@ components:
       java.server.launchMode: Standard
       java.autobuild.enabled: false
   - type: dockerimage
-    image: 'quay.io/mcouliba/workshop-tools:5.0'
+    image: 'quay.io/redhat-emea-ssa-team/workshop-tools:5.1'
     alias: workshop-tools
     memoryLimit: "3072M"
     mountSources: true
