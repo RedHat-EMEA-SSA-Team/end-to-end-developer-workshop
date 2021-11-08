@@ -58,7 +58,7 @@ spec:
             host: gateway-coolstore
 EOF
 
-oc new-app https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop#ocp4.6 \
+oc new-app https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop#5.1 \
     --strategy=docker \
     --context-dir=/labs/catalog-go \
     --name=catalog-coolstore-v2 \
