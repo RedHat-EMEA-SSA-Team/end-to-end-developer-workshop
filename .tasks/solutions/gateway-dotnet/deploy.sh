@@ -11,7 +11,7 @@ mvn clean package -DskipTests
 
 odo delete --all --force
 odo project set ${PROJECT_NAME}
-odo component create dotnet gateway --context ${CONTEXT_FOLDER} --s2i --app coolstore
+odo component create dotnet:3.1-ubi8 gateway --context ${CONTEXT_FOLDER} --s2i --app coolstore
 odo url create gateway --port 8080
 odo push
 odo link inventory --component gateway --port 8080
