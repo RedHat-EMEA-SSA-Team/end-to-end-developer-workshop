@@ -18,10 +18,10 @@ The component can be built/deployed in many different ways for example:
 
 ## Environment Variables
 The Gateway service is dependent on the Catalog and Inventory services, so without links to these it cannot function. The current implmentation will typically fail to start cleanly without these enviroment variables set
-* COMPONENT_INVENTORY_HOST
-* COMPONENT_INVENTORY_PORT
-* COMPONENT_CATALOG_HOST
-* COMPONENT_CATALOG_PORT
+* INVENTORY_COOLSTORE_SERVICE_HOST
+* INVENTORY_COOLSTORE_SERVICE_PORT
+* CATALOG_COOLSTORE_SERVICE_HOST
+* CATALOG_COOLSTORE_SERVICE_PORT
 
 ## URLs
 As before the main entry point to the service API is via ``<hostname>/api/products`` and this returns an amalgamation of the product infortmation collected from the Catalog service with the availability amount coming from the Inventory service.
@@ -36,7 +36,7 @@ oc new-app dotnet:3.1~https://github.com/alexgroom/cnw3.git \
   --context-dir=gateway-dotnet --name=gateway \
   --as-deployment-config\
   -l app.openshift.io/runtime=dotnet \
-  -e COMPONENT_CATALOG_HOST=catalog -e COMPONENT_INVENTORY_HOST=inventory -e COMPONENT_CATALOG_PORT=8080 -e COMPONENT_INVENTORY_PORT=8080
+  -e CATALOG_COOLSTORE_SERVICE_HOST=catalog -e INVENTORY_COOLSTORE_SERVICE_HOST=inventory -e CATALOG_COOLSTORE_SERVICE_PORT=8080 -e INVENTORY_COOLSTORE_SERVICE_PORT=8080
 oc expose svc gateway
 
 ```
@@ -45,10 +45,10 @@ Fetch the source from the sub folder and then use the dotnet tooling to build an
 ```
 $ dotnet restore
 $ dotnet build
-$ export COMPONENT_CATALOG_HOST=catalog
-$ export COMPONENT_INVENTORY_HOST=inventory 
-$ export COMPONENT_CATALOG_PORT=8080 
-$ export COMPONENT_INVENTORY_PORT=8080
+$ export CATALOG_COOLSTORE_SERVICE_HOST=catalog
+$ export INVENTORY_COOLSTORE_SERVICE_HOST=inventory 
+$ export CATALOG_COOLSTORE_SERVICE_PORT=8080 
+$ export INVENTORY_COOLSTORE_SERVICE_PORT=8080
 $ dotnet run
 ```
 ## Docker command line
@@ -60,10 +60,10 @@ $ docker pull registry.redhat.io/ubi8/dotnet-31-runtime
 
 
 $ docker build -t gateway .
-$ docker run --env COMPONENT_CATALOG_HOST=localhost \
---env COMPONENT_INVENTORY_HOST=localhost \
---env COMPONENT_CATALOG_PORT=80 \
---env COMPONENT_INVENTORY_PORT=80 \
+$ docker run --env CATALOG_COOLSTORE_SERVICE_HOST=localhost \
+--env INVENTORY_COOLSTORE_SERVICE_HOST=localhost \
+--env CATALOG_COOLSTORE_SERVICE_PORT=80 \
+--env INVENTORY_COOLSTORE_SERVICE_PORT=80 \
  gateway
 ```
 ## +Add from Git or Dockerfile

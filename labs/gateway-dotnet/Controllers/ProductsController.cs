@@ -22,12 +22,12 @@ namespace gateway.Controllers
             {
                 // discover the URL of the services we are going to call
                 catalogApiHost = "http://" + 
-                    Environment.GetEnvironmentVariable("COMPONENT_CATALOG_HOST") + ":" +
-                    Environment.GetEnvironmentVariable("COMPONENT_CATALOG_PORT");
+                    Environment.GetEnvironmentVariable("CATALOG_COOLSTORE_SERVICE_HOST") + ":" +
+                    Environment.GetEnvironmentVariable("CATALOG_COOLSTORE_SERVICE_PORT");
                 
                 inventoryApiHost = "http://" +
-                    Environment.GetEnvironmentVariable("COMPONENT_INVENTORY_HOST") + ":" +
-                    Environment.GetEnvironmentVariable("COMPONENT_INVENTORY_PORT");
+                    Environment.GetEnvironmentVariable("INVENTORY_COOLSTORE_SERVICE_HOST") + ":" +
+                    Environment.GetEnvironmentVariable("INVENTORY_COOLSTORE_SERVICE_PORT");
 
                 // set up the Http conection pools
                 inventoryHttpClient.BaseAddress = new Uri(inventoryApiHost);
@@ -35,10 +35,10 @@ namespace gateway.Controllers
             }
             catch(Exception e)
             {
-                Console.WriteLine("Checking ENV COMPONENT_CATALOG_HOST=" + Environment.GetEnvironmentVariable("COMPONENT_CATALOG_HOST"));
-                Console.WriteLine("Checking ENV COMPONENT_CATALOG_PORT=" + Environment.GetEnvironmentVariable("COMPONENT_CATALOG_PORT"));
-                Console.WriteLine("Checking ENV COMPONENT_INVENTORY_HOST=" + Environment.GetEnvironmentVariable("COMPONENT_INVENTORY_HOST"));
-                Console.WriteLine("Checking ENV COMPONENT_INVENTORY_PORT=" + Environment.GetEnvironmentVariable("COMPONENT_INVENTORY_PORT"));
+                Console.WriteLine("Checking ENV CATALOG_COOLSTORE_SERVICE_HOST=" + Environment.GetEnvironmentVariable("CATALOG_COOLSTORE_SERVICE_HOST"));
+                Console.WriteLine("Checking ENV CATALOG_COOLSTORE_SERVICE_PORT=" + Environment.GetEnvironmentVariable("CATALOG_COOLSTORE_SERVICE_PORT"));
+                Console.WriteLine("Checking ENV INVENTORY_COOLSTORE_SERVICE_HOST=" + Environment.GetEnvironmentVariable("INVENTORY_COOLSTORE_SERVICE_HOST"));
+                Console.WriteLine("Checking ENV INVENTORY_COOLSTORE_SERVICE_PORT=" + Environment.GetEnvironmentVariable("INVENTORY_COOLSTORE_SERVICE_PORT"));
                 Console.WriteLine("Failure to build location URLs for Catalog and Inventory services: " + e.Message);
                 throw e;
             }

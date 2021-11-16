@@ -82,7 +82,7 @@ commands:
   - name: 'Inventory - Create Component'
     actions:
       - command: >-
-          odo component create java:11 inventory --app coolstore --binary target/inventory-quarkus-1.0.0-SNAPSHOT-runner.jar --s2i --project my-project${CHE_WORKSPACE_NAMESPACE#user}
+          odo create java-quarkus inventory --app coolstore --project my-project${CHE_WORKSPACE_NAMESPACE#user}
         type: exec
         workdir: /projects/workshop/labs/inventory-quarkus
         component: workshop-tools
@@ -127,7 +127,7 @@ commands:
   - name: 'Catalog - Create Component'
     actions:
       - command: >-
-          odo component create java:11 catalog --app coolstore --binary target/catalog-1.0-SNAPSHOT.jar --s2i --project my-project${CHE_WORKSPACE_NAMESPACE#user}
+          odo create java-springboot catalog --app coolstore --project my-project${CHE_WORKSPACE_NAMESPACE#user}
         type: exec
         workdir: /projects/workshop/labs/catalog-spring-boot
         component: workshop-tools
@@ -154,7 +154,7 @@ commands:
   - name: 'Gateway - Create Component'
     actions:
       - command: >-
-          odo component create dotnet:3.1-ubi8 gateway --app coolstore --s2i --project my-project${CHE_WORKSPACE_NAMESPACE#user}
+          odo create dotnetcore31 gateway --app coolstore --project my-project${CHE_WORKSPACE_NAMESPACE#user}
         type: exec
         workdir: /projects/workshop/labs/gateway-dotnet
         component: workshop-tools

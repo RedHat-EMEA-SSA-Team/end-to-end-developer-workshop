@@ -42,8 +42,8 @@ public class GatewayVerticle extends AbstractVerticle {
             } else {
                 JsonObject config = ar.result();
 
-                String catalogApiHost = config.getString("COMPONENT_CATALOG_HOST", "localhost");
-                Integer catalogApiPort = config.getInteger("COMPONENT_CATALOG_PORT", 9001);
+                String catalogApiHost = config.getString("CATALOG_COOLSTORE_SERVICE_HOST", "localhost");
+                Integer catalogApiPort = config.getInteger("CATALOG_COOLSTORE_SERVICE_PORT", 9001);
 
                 catalog = WebClient.create(vertx,
                     new WebClientOptions()
@@ -52,8 +52,8 @@ public class GatewayVerticle extends AbstractVerticle {
 
                 LOG.info("Catalog Service Endpoint: " + catalogApiHost + ":" + catalogApiPort.toString());
 
-                String inventoryApiHost = config.getString("COMPONENT_INVENTORY_HOST", "localhost");
-                Integer inventoryApiPort = config.getInteger("COMPONENT_INVENTORY_PORT", 9001);
+                String inventoryApiHost = config.getString("INVENTORY_COOLSTORE_SERVICE_HOST", "localhost");
+                Integer inventoryApiPort = config.getInteger("INVENTORY_COOLSTORE_SERVICE_PORT", 9001);
 
                 inventory = WebClient.create(vertx,
                     new WebClientOptions()
