@@ -9,11 +9,9 @@ PROJECT_NAME=$1
 $DIRECTORY/solve.sh
 
 cd ${CONTEXT_FOLDER}
-mvn clean package -DskipTests
-
 odo delete --all --force
 odo project set ${PROJECT_NAME}
-odo create java:11 inventory --context ${CONTEXT_FOLDER} --binary target/inventory-quarkus-1.0.0-SNAPSHOT-runner.jar --s2i --app coolstore
+odo create java-quarkus inventory --app coolstore
 odo url create inventory --port 8080
 odo push
 

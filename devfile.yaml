@@ -181,7 +181,7 @@ commands:
   - name: 'Catalog - Link to Gateway'
     actions:
       - command: >-
-          odo link catalog --port 8080 --component gateway
+          odo link catalog --port 8080
         type: exec
         workdir: /projects/workshop/labs/gateway-dotnet
         component: workshop-tools
@@ -190,7 +190,7 @@ commands:
   - name: 'Inventory - Link to Gateway'
     actions:
       - command: >-
-          odo link inventory --port 8080 --component gateway
+          odo link inventory --port 8080
         type: exec
         workdir: /projects/workshop/labs/gateway-dotnet
         component: workshop-tools

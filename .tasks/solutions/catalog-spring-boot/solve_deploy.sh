@@ -9,11 +9,9 @@ PROJECT_NAME=$1
 $DIRECTORY/solve.sh
 
 cd ${CONTEXT_FOLDER}
-mvn clean package -DskipTests
-
 odo delete --all --force
 odo project set ${PROJECT_NAME}
-odo create java:11 catalog --context ${CONTEXT_FOLDER} --binary target/catalog-1.0-SNAPSHOT.jar --s2i --app coolstore
+odo create java-springboot catalog --app coolstore
 odo url create catalog --port 8080
 odo push
 

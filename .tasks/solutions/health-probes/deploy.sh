@@ -14,7 +14,6 @@ echo "Catalog Service Health Probes Done"
 
 cp $DIRECTORY/pom.xml $DIRECTORY/../../../labs/inventory-quarkus
 cd $DIRECTORY/../../../labs/inventory-quarkus
-mvn clean package -DskipTests
 
 odo push
 oc label dc inventory-coolstore app.openshift.io/runtime=quarkus --overwrite

@@ -11,11 +11,11 @@ mvn clean package -DskipTests
 
 odo delete --all --force
 odo project set ${PROJECT_NAME}
-odo component create dotnet gateway --context ${CONTEXT_FOLDER} --s2i --app coolstore
+odo create dotnetcore31 gateway --app coolstore
 odo url create gateway --port 8080
 odo push
-odo link inventory --component gateway --port 8080
-odo link catalog --component gateway --port 8080
+odo link inventory --port 8080
+odo link catalog --port 8080
 
 oc annotate --overwrite dc/gateway-coolstore app.openshift.io/connects-to='catalog,inventory'
 oc label dc gateway-coolstore app.openshift.io/runtime=dotnet --overwrite
