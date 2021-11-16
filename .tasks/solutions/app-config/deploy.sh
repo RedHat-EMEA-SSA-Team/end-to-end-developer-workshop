@@ -32,7 +32,7 @@ then
     cp $DIRECTORY/application.properties $DIRECTORY/../../../labs/inventory-quarkus/src/main/resources
     cd $DIRECTORY/../../../labs/inventory-quarkus
     odo push
-    oc label dc inventory-coolstore app.openshift.io/runtime=quarkus --overwrite
+    oc label deployment inventory-coolstore app.openshift.io/runtime=quarkus --overwrite
 
      cat <<EOF > ${CONTEXT_FOLDER}/inventory-openshift-application.properties
 quarkus.datasource.url=jdbc:mariadb://inventory-mariadb.${PROJECT_NAME}.svc:3306/inventorydb
@@ -42,7 +42,7 @@ EOF
 
     oc create configmap inventory --from-file=application.properties=${CONTEXT_FOLDER}/inventory-openshift-application.properties
     oc label configmap inventory app=coolstore app.kubernetes.io/instance=inventory
-    oc set volume dc/inventory-coolstore --add --configmap-name=inventory --mount-path=/deployments/config
+    oc set volume deployment/inventory-coolstore --add --configmap-name=inventory --mount-path=/deployments/config
 
     cat <<EOF > ${CONTEXT_FOLDER}/catalog-openshift-application.properties
 spring.datasource.url=jdbc:postgresql://catalog-postgresql.${PROJECT_NAME}.svc:5432/catalogdb
@@ -56,10 +56,10 @@ EOF
     oc create configmap catalog --from-file=application.properties=${CONTEXT_FOLDER}/catalog-openshift-application.properties
     oc label configmap catalog app=coolstore app.kubernetes.io/instance=catalog
 
-    oc delete pod -l deploymentconfig=catalog-coolstore
+    oc delete pod -l component=catalog
 
-    oc annotate --overwrite dc/catalog-coolstore app.openshift.io/connects-to='catalog-postgresql'
-    oc annotate --overwrite dc/inventory-coolstore app.openshift.io/connects-to='inventory-mariadb'
+    oc annotate --overwrite deployment/catalog-coolstore app.openshift.io/connects-to='catalog-postgresql'
+    oc annotate --overwrite deployment/inventory-coolstore app.openshift.io/connects-to='inventory-mariadb'
 fi
 
 echo "Application Configuration Externalization Done"
