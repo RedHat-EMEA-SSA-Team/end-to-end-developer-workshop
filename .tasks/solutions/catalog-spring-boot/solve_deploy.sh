@@ -15,6 +15,6 @@ odo create java-springboot catalog --app coolstore
 odo url create catalog --port 8080
 odo push
 
-oc label dc catalog-coolstore app.openshift.io/runtime=spring --overwrite
+oc label deployment catalog-coolstore app.openshift.io/runtime=spring --overwrite
 
 echo "Catalog Spring-Boot Deployed"

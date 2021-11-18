@@ -15,6 +15,6 @@ odo create java-quarkus inventory --app coolstore
 odo url create inventory --port 8080
 odo push
 
-oc label dc inventory-coolstore app.openshift.io/runtime=quarkus --overwrite
+oc label deployment inventory-coolstore app.openshift.io/runtime=quarkus --overwrite
 
 echo "Inventory Quarkus Deployed"

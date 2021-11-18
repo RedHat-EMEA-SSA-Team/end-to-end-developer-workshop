@@ -16,7 +16,7 @@ odo create java-vertx gateway --app coolstore
 odo url create gateway --port 8080
 odo push
 
-oc annotate --overwrite dc/gateway-coolstore app.openshift.io/connects-to='catalog,inventory'
-oc label dc gateway-coolstore app.openshift.io/runtime=vertx --overwrite
+oc annotate --overwrite deployment/gateway-coolstore app.openshift.io/connects-to='catalog,inventory'
+oc label deployment gateway-coolstore app.openshift.io/runtime=vertx --overwrite
 
 echo "Gateway Vertx Deployed"

@@ -26,6 +26,8 @@ components:
         value: '-Xmx2048m -Duser.home=/home/developer'
       - name: MAVEN_MIRROR_URL
         value: http://nexus.opentlc-shared.svc:8081/repository/maven-all-public
+      - value: 'quay.io/phmartin/odo-init-container:issue4822-2'
+        name: ODO_BOOTSTRAPPER_IMAGE
     endpoints:
        - name: 8080-port
          port: 8080

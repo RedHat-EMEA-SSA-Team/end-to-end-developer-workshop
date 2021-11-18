@@ -17,7 +17,7 @@ odo push
 odo link inventory --port 8080
 odo link catalog --port 8080
 
-oc annotate --overwrite dc/gateway-coolstore app.openshift.io/connects-to='catalog,inventory'
-oc label dc gateway-coolstore app.openshift.io/runtime=dotnet --overwrite
+oc annotate --overwrite deployment/gateway-coolstore app.openshift.io/connects-to='catalog,inventory'
+oc label deployment gateway-coolstore app.openshift.io/runtime=dotnet --overwrite
 
 echo "Gateway .NET Deployed"
