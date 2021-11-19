@@ -43,8 +43,8 @@ components:
       path: /
       protocol: http
       targetPort: 8080
-    image: quay.io/eclipse/che-java11-maven:next
-    memoryLimit: 512Mi
+    image: quay.io/redhat-emea-ssa-team/workshop-tools:6.0
+    memoryLimit: 2048Mi
     mountSources: true
     volumeMounts:
     - name: m2
