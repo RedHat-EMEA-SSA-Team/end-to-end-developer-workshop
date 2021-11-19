@@ -13,7 +13,7 @@ metadata:
   website: https://quarkus.io
 commands:
 - exec:
-    commandLine: java -jar target/*.jar
+    commandLine: java -jar target/quarkus-app/*.jar
     component: tools
     group:
       isDefault: true
@@ -29,6 +29,6 @@ components:
       protocol: http
       targetPort: 8080
     image: registry.redhat.io/openjdk/openjdk-11-rhel7:latest
-    memoryLimit: 2048Mi
+    memoryLimit: 1024Mi
   name: tools
 

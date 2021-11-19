@@ -13,15 +13,7 @@ metadata:
   version: 1.1.0
 commands:
 - exec:
-    commandLine: mvn clean -Dmaven.repo.local=/home/user/.m2/repository package -Dmaven.test.skip=true
-    component: tools
-    group:
-      isDefault: true
-      kind: build
-    workingDir: /projects
-  id: build
-- exec:
-    commandLine: mvn -Dmaven.repo.local=/home/user/.m2/repository spring-boot:run
+    commandLine: java -jar target/*.jar
     component: tools
     group:
       isDefault: true
@@ -46,12 +38,4 @@ components:
       protocol: http
       targetPort: 8080
     image:  registry.redhat.io/openjdk/openjdk-11-rhel7:latest
-    memoryLimit: 2048Mi
-    mountSources: true
-    volumeMounts:
-    - name: m2
-      path: /home/user/.m2
-  name: tools
-- name: m2
-  volume:
-    size: 3Gi
+    memoryLimit: 1024Mi

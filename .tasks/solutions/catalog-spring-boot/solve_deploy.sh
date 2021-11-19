@@ -9,6 +9,8 @@ PROJECT_NAME=$1
 $DIRECTORY/solve.sh
 
 cd ${CONTEXT_FOLDER}
+mvn clean package -DskipTests
+
 odo delete --all --force
 odo project set ${PROJECT_NAME}
 odo create catalog --app coolstore
