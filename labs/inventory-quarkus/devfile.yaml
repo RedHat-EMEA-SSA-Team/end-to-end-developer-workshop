@@ -13,28 +13,13 @@ metadata:
   website: https://quarkus.io
 commands:
 - exec:
-    commandLine: mvn -Dmaven.repo.local=/home/user/.m2/repository compile
-    component: tools
-    workingDir: $PROJECTS_ROOT
-  id: init-compile
-- exec:
-    commandLine: mvn -Dmaven.repo.local=/home/user/.m2/repository quarkus:dev -Dquarkus.http.host=0.0.0.0
+    commandLine: java -jar target/*.jar
     component: tools
     group:
       isDefault: true
       kind: run
-    hotReloadCapable: true
     workingDir: /projects
   id: dev-run
-- exec:
-    commandLine: mvn -Dmaven.repo.local=/home/user/.m2/repository quarkus:dev -Dquarkus.http.host=0.0.0.0 -Ddebug=${DEBUG_PORT}
-    component: tools
-    group:
-      isDefault: true
-      kind: debug
-    hotReloadCapable: true
-    workingDir: /projects
-  id: dev-debug
 components:
 - container:
     endpoints:
@@ -43,16 +28,7 @@ components:
       path: /
       protocol: http
       targetPort: 8080
-    image: quay.io/redhat-emea-ssa-team/workshop-tools:6.0
+    image: registry.redhat.io/openjdk/openjdk-11-rhel7:latest
     memoryLimit: 2048Mi
-    mountSources: true
-    volumeMounts:
-    - name: m2
-      path: /home/user/.m2
   name: tools
-- name: m2
-  volume:
-    size: 3Gi
-events:
-  postStart:
-  - init-compile
+
