@@ -10,8 +10,7 @@ cd ${CONTEXT_FOLDER}
 
 odo delete --all --force
 odo project set ${PROJECT_NAME}
-odo create dotnetcore31 gateway --app coolstore
-odo url create gateway --port 8080
+odo create gateway --app coolstore
 odo push
 
 oc annotate --overwrite deployment/gateway-coolstore app.openshift.io/connects-to='catalog,inventory'
