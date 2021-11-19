@@ -1,0 +1,58 @@
+schemaVersion: 2.0.0
+metadata:
+  description: Quarkus with Java
+  displayName: Quarkus Java
+  icon: https://design.jboss.org/quarkus/logo/final/SVG/quarkus_icon_rgb_default.svg
+  language: java
+  name: inventory
+  projectType: quarkus
+  tags:
+  - Java
+  - Quarkus
+  version: 1.1.0
+  website: https://quarkus.io
+commands:
+- exec:
+    commandLine: mvn -Dmaven.repo.local=/home/user/.m2/repository compile
+    component: tools
+    workingDir: $PROJECTS_ROOT
+  id: init-compile
+- exec:
+    commandLine: mvn -Dmaven.repo.local=/home/user/.m2/repository quarkus:dev -Dquarkus.http.host=0.0.0.0
+    component: tools
+    group:
+      isDefault: true
+      kind: run
+    hotReloadCapable: true
+    workingDir: /projects
+  id: dev-run
+- exec:
+    commandLine: mvn -Dmaven.repo.local=/home/user/.m2/repository quarkus:dev -Dquarkus.http.host=0.0.0.0 -Ddebug=${DEBUG_PORT}
+    component: tools
+    group:
+      isDefault: true
+      kind: debug
+    hotReloadCapable: true
+    workingDir: /projects
+  id: dev-debug
+components:
+- container:
+    endpoints:
+    - exposure: public
+      name: inventory
+      path: /
+      protocol: http
+      targetPort: 8080
+    image: registry.access.redhat.com/ubi8/openjdk-11
+    memoryLimit: 512Mi
+    mountSources: true
+    volumeMounts:
+    - name: m2
+      path: /home/user/.m2
+  name: tools
+- name: m2
+  volume:
+    size: 3Gi
+events:
+  postStart:
+  - init-compile
