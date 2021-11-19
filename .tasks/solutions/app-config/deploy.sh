@@ -31,11 +31,13 @@ then
     cp $DIRECTORY/pom.xml $DIRECTORY/../../../labs/inventory-quarkus
     cp $DIRECTORY/application.properties $DIRECTORY/../../../labs/inventory-quarkus/src/main/resources
     cd $DIRECTORY/../../../labs/inventory-quarkus
+    mvn clean package -DskipTests
+
     odo push
     oc label deployment inventory-coolstore app.openshift.io/runtime=quarkus --overwrite
 
      cat <<EOF > ${CONTEXT_FOLDER}/inventory-openshift-application.properties
-quarkus.datasource.url=jdbc:mariadb://inventory-mariadb.${PROJECT_NAME}.svc:3306/inventorydb
+quarkus.datasource.jdbc.url=jdbc:mariadb://inventory-mariadb.${PROJECT_NAME}.svc:3306/inventorydb
 quarkus.datasource.username=inventory
 quarkus.datasource.password=inventory
 EOF
