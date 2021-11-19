@@ -44,7 +44,8 @@ EOF
 
     oc create configmap inventory --from-file=application.properties=${CONTEXT_FOLDER}/inventory-openshift-application.properties
     oc label configmap inventory app=coolstore app.kubernetes.io/instance=inventory
-    oc set volume deployment/inventory-coolstore --add --configmap-name=inventory --mount-path=/deployments/config
+
+    oc delete pod -l component=inventory
 
     cat <<EOF > ${CONTEXT_FOLDER}/catalog-openshift-application.properties
 spring.datasource.url=jdbc:postgresql://catalog-postgresql.${PROJECT_NAME}.svc:5432/catalogdb
