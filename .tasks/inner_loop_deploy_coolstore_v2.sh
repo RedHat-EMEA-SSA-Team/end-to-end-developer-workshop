@@ -13,8 +13,8 @@ then
     exit 1
 fi
 
-$DIRECTORY/solutions/catalog-spring-boot/solve_deploy.sh ${PROJECT_NAME}
 $DIRECTORY/solutions/inventory-quarkus/solve_deploy.sh ${PROJECT_NAME}
+$DIRECTORY/solutions/catalog-spring-boot/solve_deploy.sh ${PROJECT_NAME}
 $DIRECTORY/solutions/gateway-dotnet/deploy.sh ${PROJECT_NAME}
 $DIRECTORY/solutions/web-nodejs/deploy.sh ${PROJECT_NAME}
 $DIRECTORY/solutions/health-probes/deploy.sh ${PROJECT_NAME}
