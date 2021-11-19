@@ -43,7 +43,7 @@ components:
       path: /
       protocol: http
       targetPort: 8080
-    image: registry.access.redhat.com/ubi8/openjdk-11
+    image: quay.io/eclipse/che-java11-maven:next
     memoryLimit: 512Mi
     mountSources: true
     volumeMounts:

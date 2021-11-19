@@ -11,8 +11,7 @@ $DIRECTORY/solve.sh
 cd ${CONTEXT_FOLDER}
 odo delete --all --force
 odo project set ${PROJECT_NAME}
-odo create java-springboot catalog --app coolstore
-odo url create catalog --port 8080
+odo create catalog --app coolstore
 odo push
 
 oc label deployment catalog-coolstore app.openshift.io/runtime=spring --overwrite
