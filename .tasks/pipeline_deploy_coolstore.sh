@@ -13,12 +13,12 @@ tkn pipeline start coolstore-java-pipeline -n ${NAMESPACE} \
     --param APP_GIT_CONTEXT=labs/catalog-spring-boot \
     --param NAMESPACE=${NAMESPACE}
 
-tkn pipeline start coolstore-java-pipeline -n ${NAMESPACE} \
+tkn pipeline start coolstore-dotnet-pipeline -n ${NAMESPACE} \
     --prefix-name gateway \
     --workspace name=shared-workspace,claimName=gateway-pipeline-pvc \
     --param APP_NAME=gateway \
     --param APP_GIT_URL=https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git \
-    --param APP_GIT_CONTEXT=labs/gateway-vertx \
+    --param APP_GIT_CONTEXT=labs/gateway-dotnet \
     --param NAMESPACE=${NAMESPACE}
 
 tkn pipeline start coolstore-nodejs-pipeline -n ${NAMESPACE} \

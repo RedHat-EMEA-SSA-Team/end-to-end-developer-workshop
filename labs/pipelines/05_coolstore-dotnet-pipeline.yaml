@@ -2,7 +2,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: coolstore-java-pipeline
+  name: coolstore-dotnet-pipeline
 spec:
   params:
     - name: APP_NAME
@@ -34,16 +34,17 @@ spec:
       workspaces:
         - name: output
           workspace: shared-workspace
-    - name: s2i-java
+    - name: s2i-dotnet
       params:
+        - name: BUILDER_IMAGE
+          value: >-
+            registry.redhat.io/rhel8/buildah@sha256:99cae35f40c7ec050fed3765b2b27e0b8bbea2aa2da7c16408e2ca13c60ff8ee
+        - name: VERSION
+          value: 3.1-ubi8
         - name: PATH_CONTEXT
-          value: $(params.APP_GIT_CONTEXT)
+          value: labs/gateway-dotnet
         - name: TLSVERIFY
           value: 'false'
-        - name: MAVEN_CLEAR_REPO
-          value: 'false'
-        - name: MAVEN_MIRROR_URL
-          value: 'http://nexus.opentlc-shared.svc:8081/repository/maven-all-public'
         - name: IMAGE
           value: >-
             image-registry.openshift-image-registry.svc:5000/$(params.NAMESPACE)/$(params.APP_NAME)-coolstore
@@ -51,7 +52,7 @@ spec:
         - git-clone
       taskRef:
         kind: ClusterTask
-        name: s2i-java
+        name: s2i-dotnet
       workspaces:
         - name: source
           workspace: shared-workspace
@@ -60,7 +61,7 @@ spec:
         - name: application-name
           value: $(params.APP_NAME)
       runAfter:
-        - s2i-java
+        - s2i-dotnet
       taskRef:
         kind: Task
         name: argocd-task-sync-and-wait
