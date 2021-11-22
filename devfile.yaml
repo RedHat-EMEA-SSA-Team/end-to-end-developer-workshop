@@ -99,15 +99,6 @@ commands:
         component: workshop-tools
                 
  
-  - name: 'Inventory - Expose'
-    actions:
-      - command: >-
-          odo url create inventory --port 8080
-        type: exec
-        workdir: /projects/workshop/labs/inventory-quarkus
-        component: workshop-tools
-                
- 
   - name: 'Catalog - Build'
     actions:
       - command: >-
@@ -135,15 +126,6 @@ commands:
         component: workshop-tools
                 
  
-  - name: 'Catalog - Expose'
-    actions:
-      - command: >-
-          odo url create catalog --port 8080
-        type: exec
-        workdir: /projects/workshop/labs/catalog-spring-boot
-        component: workshop-tools
-                
- 
   - name: 'Catalog - Push'
     actions:
       - command: >-
@@ -157,15 +139,6 @@ commands:
     actions:
       - command: >-
           odo create --app coolstore --project my-project${CHE_WORKSPACE_NAMESPACE#user}
-        type: exec
-        workdir: /projects/workshop/labs/gateway-dotnet
-        component: workshop-tools
-                
- 
-  - name: 'Gateway - Expose'
-    actions:
-      - command: >-
-          odo url create gateway --port 8080
         type: exec
         workdir: /projects/workshop/labs/gateway-dotnet
         component: workshop-tools
