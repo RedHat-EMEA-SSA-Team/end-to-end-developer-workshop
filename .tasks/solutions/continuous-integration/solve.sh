@@ -26,7 +26,7 @@ git init
 git remote add origin ${GITEA_URL}/user${USER_ID}/inventory-quarkus.git
 git add *
 git commit -m "Initial"
-git push ${GITEA_URL_WITH_CREDENTIALS}/user${USER_ID}/inventory-quarkus.gi
+git push ${GITEA_URL_WITH_CREDENTIALS}/user${USER_ID}/inventory-quarkus.git
 
 cat << EOF | oc apply -f -
 kind: PersistentVolumeClaim
