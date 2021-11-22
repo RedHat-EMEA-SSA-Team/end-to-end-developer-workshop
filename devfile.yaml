@@ -191,7 +191,7 @@ commands:
   - name: 'Probes - Configure Gateway & Web'
     actions:
       - command: >-
-          oc project my-project${CHE_WORKSPACE_NAMESPACE#user}; oc set probe dc/gateway-coolstore  --liveness --readiness --period-seconds=5 --get-url=http://:8080/health;oc set probe deployment/web-coolstore  --liveness --readiness --period-seconds=5 --get-url=http://:8080/;echo "Health Probes Done"
+          oc project my-project${CHE_WORKSPACE_NAMESPACE#user}; oc set probe deployment/gateway-coolstore  --liveness --readiness --period-seconds=5 --get-url=http://:8080/health;oc set probe deployment/web-coolstore  --liveness --readiness --period-seconds=5 --get-url=http://:8080/;echo "Health Probes Done"
         type: exec
         workdir: /projects/workshop
         component: workshop-tools
