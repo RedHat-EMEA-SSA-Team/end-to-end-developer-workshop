@@ -152,24 +152,6 @@ commands:
         component: workshop-tools
                 
  
-  - name: 'Catalog - Link to Gateway'
-    actions:
-      - command: >-
-          odo link catalog --port 8080
-        type: exec
-        workdir: /projects/workshop/labs/gateway-dotnet
-        component: workshop-tools
-                
- 
-  - name: 'Inventory - Link to Gateway'
-    actions:
-      - command: >-
-          odo link inventory --port 8080
-        type: exec
-        workdir: /projects/workshop/labs/gateway-dotnet
-        component: workshop-tools
-                
- 
   - name: 'Catalog - Generate Traffic'
     actions:
       - command: >-
@@ -195,16 +177,6 @@ commands:
         workdir: /projects/workshop
         component: workshop-tools
                   
- 
-  - name: 'Inventory - Mount ConfigMap'
-    actions:
-      - command: >-
-          oc set volume dc/inventory-coolstore --add --configmap-name=inventory --mount-path=/deployments/config -n my-project${CHE_WORKSPACE_NAMESPACE#user}
-        type: exec
-        workdir: /projects/workshop/labs/inventory-quarkus
-        component: workshop-tools
-                
- 
   - name: 'Gateway - Generate Traffic'
     actions:
       - command: >-

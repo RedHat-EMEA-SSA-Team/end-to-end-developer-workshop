@@ -13,7 +13,7 @@ metadata:
   website: https://quarkus.io
 commands:
 - exec:
-    commandLine: java -jar target/quarkus-app/*.jar
+    commandLine: java -jar target/*.jar
     component: tools
     group:
       isDefault: true
