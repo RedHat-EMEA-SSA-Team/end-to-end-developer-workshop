@@ -1,4 +1,3 @@
-apiVersion: 1.0.0
 metadata:
   name: wksp-end-to-end-dev
 attributes:

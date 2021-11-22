@@ -71,6 +71,18 @@
           <groupId>io.quarkus</groupId>
           <artifactId>quarkus-jdbc-h2</artifactId>
         </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-smallrye-health</artifactId>
+        </dependency>
+         <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-jdbc-mariadb</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-kubernetes-config</artifactId>
+        </dependency>
     </dependencies>
 
   <build>
