@@ -26,15 +26,7 @@ git init
 git remote add origin ${GITEA_URL}/user${USER_ID}/inventory-quarkus.git
 git add *
 git commit -m "Initial"
-git push ${GITEA_URL_WITH_CREDENTIALS}/user${USER_ID}/inventory-quarkus.git
-
-cat << EOF | oc apply -f -
-apiVersion: image.openshift.io/v1
-kind: ImageStream
-metadata:
-  name: inventory-coolstore
-  namespace: cn-project${USER_ID}
-EOF
+git push ${GITEA_URL_WITH_CREDENTIALS}/user${USER_ID}/inventory-quarkus.gi
 
 cat << EOF | oc apply -f -
 kind: PersistentVolumeClaim

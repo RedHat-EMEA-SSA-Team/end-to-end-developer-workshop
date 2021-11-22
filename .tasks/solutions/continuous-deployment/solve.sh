@@ -127,7 +127,7 @@ spec:
     - name: openshift-client
       params:
         - name: SCRIPT
-          value: oc rollout latest inventory-coolstore
+          value: oc rollout status deployment/inventory-coolstore
       runAfter:
         - argocd-task-sync-and-wait
       taskRef:
