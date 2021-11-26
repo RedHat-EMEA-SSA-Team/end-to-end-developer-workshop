@@ -14,7 +14,7 @@ metadata:
 commands:
 - exec:
     commandLine: java -jar target/*.jar
-    component: tools
+    component: application
     group:
       isDefault: true
       kind: run
@@ -30,5 +30,5 @@ components:
       targetPort: 8080
     image: registry.redhat.io/openjdk/openjdk-11-rhel7:latest
     memoryLimit: 1024Mi
-  name: tools
+  name: application
 

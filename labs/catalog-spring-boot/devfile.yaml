@@ -14,7 +14,7 @@ metadata:
 commands:
 - exec:
     commandLine: java -jar target/*.jar
-    component: tools
+    component: application
     group:
       isDefault: true
       kind: run
@@ -23,7 +23,7 @@ commands:
 - exec:
     commandLine: java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=${DEBUG_PORT},suspend=n
       -jar target/*.jar
-    component: tools
+    component: application
     group:
       isDefault: true
       kind: debug
@@ -39,4 +39,4 @@ components:
       targetPort: 8080
     image:  registry.redhat.io/openjdk/openjdk-11-rhel7:latest
     memoryLimit: 1024Mi
-  name: tools
+  name: application
