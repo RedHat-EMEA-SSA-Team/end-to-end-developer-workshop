@@ -4,6 +4,7 @@
 
 DIRECTORY=`dirname $0`
 USER_ID=$1
+APPS_HOSTNAME_SUFFIX=$(oc whoami --show-console | sed 's%.*\(apps.*\)$%\1%g')
 
 oc project cn-project${USER_ID}
 
@@ -20,7 +21,7 @@ cat << EOF | oc apply -f -
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  name: gateway-coolstore
+  name: ingressgateway
   namespace: cn-project${USER_ID}
 spec:
   selector:
@@ -31,7 +32,7 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        - "*"
+        - "ingressgateway-cn-project${USER_ID}.${APPS_HOSTNAME_SUFFIX}"
 EOF
 
 cat << EOF | oc apply -f -
@@ -42,21 +43,18 @@ metadata:
   namespace: cn-project${USER_ID}
 spec:
   hosts:
-    - "*"
+    - "ingressgateway-cn-project${USER_ID}.${APPS_HOSTNAME_SUFFIX}"
   gateways:
-    - gateway-coolstore
+    - ingressgateway
   http:
-    - match:
-        - uri:
-            prefix: /cn-project${USER_ID}/api
-      rewrite:
-        uri: "/api"
-      route:
+    - route:
         - destination:
             port:
               number: 8080
             host: gateway-coolstore
 EOF
+
+oc set env deployment/web-coolstore COOLSTORE_GW_ENDPOINT="http://ingressgateway-cn-project${USER_ID}.${APPS_HOSTNAME_SUFFIX}"
 
 oc new-app https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop \
     --strategy=docker \
