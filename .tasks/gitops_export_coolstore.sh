@@ -129,7 +129,7 @@ do
         sed -i "/^.*: \[\]$/d"  ${DEPLOYMENTCONFIG_YAML}
         sed -i "s/triggers: .*/triggers: []/g"  ${DEPLOYMENTCONFIG_YAML}
         sed -i "s/image: .*$/image: image-registry.openshift-image-registry.svc:5000\/${PROJECT}\/${COMPONENT_NAME}:latest/g" ${DEPLOYMENTCONFIG_YAML}
-        sed -i "s/8080-tcp/http/g" ${DEPLOYMENTCONFIG_YAML}
+        sed -i "s/port-8080/http/g" ${DEPLOYMENT_YAML}
     fi
 
     ## Deployment
@@ -165,7 +165,7 @@ do
         grep '\- envFrom:' ${DEPLOYMENT_YAML} &> /dev/null || sed -i "s/  image:/- image:/g"  ${DEPLOYMENT_YAML}
         sed -i "/^.*: \[\]$/d"  ${DEPLOYMENT_YAML}
         sed -i "s/image: .*$/image: image-registry.openshift-image-registry.svc:5000\/${PROJECT}\/${COMPONENT_NAME}:latest/g" ${DEPLOYMENT_YAML}
-        sed -i "s/8080-tcp/http/g" ${DEPLOYMENT_YAML}
+        sed -i "s/port-8080/http/g" ${DEPLOYMENT_YAML}
     fi
 done
 
