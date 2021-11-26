@@ -60,7 +60,7 @@ do
         yq write --inplace ${SERVICE_YAML} items[*].spec.selector.app ${COMPONENT_NAME%-coolstore}
         yq write --inplace ${SERVICE_YAML} items[*].metadata.labels.app ${COMPONENT_NAME%-coolstore}
         
-        sed -i "s/8080-tcp/http/g" ${SERVICE_YAML}
+        sed -i "s/port-8080/http/g" ${SERVICE_YAML}
     fi 
     ## Route
     oc get route -n ${DEV_PROJECT} -lapp.kubernetes.io/instance=${COMPONENT_NAME%-coolstore} -o yaml --ignore-not-found > ${ROUTE_YAML}
@@ -129,7 +129,7 @@ do
         sed -i "/^.*: \[\]$/d"  ${DEPLOYMENTCONFIG_YAML}
         sed -i "s/triggers: .*/triggers: []/g"  ${DEPLOYMENTCONFIG_YAML}
         sed -i "s/image: .*$/image: image-registry.openshift-image-registry.svc:5000\/${PROJECT}\/${COMPONENT_NAME}:latest/g" ${DEPLOYMENTCONFIG_YAML}
-        sed -i "s/port-8080/http/g" ${DEPLOYMENT_YAML}
+        sed -i "s/8080-tcp/http/g" ${DEPLOYMENTCONFIG_YAML}
     fi
 
     ## Deployment
@@ -165,7 +165,7 @@ do
         grep '\- envFrom:' ${DEPLOYMENT_YAML} &> /dev/null || sed -i "s/  image:/- image:/g"  ${DEPLOYMENT_YAML}
         sed -i "/^.*: \[\]$/d"  ${DEPLOYMENT_YAML}
         sed -i "s/image: .*$/image: image-registry.openshift-image-registry.svc:5000\/${PROJECT}\/${COMPONENT_NAME}:latest/g" ${DEPLOYMENT_YAML}
-        sed -i "s/port-8080/http/g" ${DEPLOYMENT_YAML}
+        sed -i "s/port-8080-tcp/http/g" ${DEPLOYMENT_YAML}
     fi
 done
 
