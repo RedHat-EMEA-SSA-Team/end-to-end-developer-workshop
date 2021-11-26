@@ -61,6 +61,7 @@ do
         yq write --inplace ${SERVICE_YAML} items[*].metadata.labels.app ${COMPONENT_NAME%-coolstore}
         
         sed -i "s/port-8080/http/g" ${SERVICE_YAML}
+        sed -i "s/8080-tcp/http/g" ${SERVICE_YAML}
     fi 
     ## Route
     oc get route -n ${DEV_PROJECT} -lapp.kubernetes.io/instance=${COMPONENT_NAME%-coolstore} -o yaml --ignore-not-found > ${ROUTE_YAML}
