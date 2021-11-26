@@ -9,13 +9,10 @@ APPS_HOSTNAME_SUFFIX=$(oc whoami --show-console | sed 's%.*\(apps.*\)$%\1%g')
 oc project cn-project${USER_ID}
 
 oc patch deployment/catalog-coolstore --patch '{"spec": {"template": {"metadata": {"annotations": {"sidecar.istio.io/inject": "true"}}}}}' -n cn-project${USER_ID}
-oc rollout latest catalog-coolstore
 
 oc patch deployment/inventory-coolstore --patch '{"spec": {"template": {"metadata": {"annotations": {"sidecar.istio.io/inject": "true"}}}}}' -n cn-project${USER_ID}
-oc rollout latest inventory-coolstore
 
 oc patch deployment/gateway-coolstore --patch '{"spec": {"template": {"metadata": {"annotations": {"sidecar.istio.io/inject": "true"}}}}}' -n cn-project${USER_ID}
-oc rollout latest gateway-coolstore
 
 cat << EOF | oc apply -f -
 apiVersion: networking.istio.io/v1beta1
