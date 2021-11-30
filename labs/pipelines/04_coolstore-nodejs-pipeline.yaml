@@ -11,8 +11,6 @@ spec:
       type: string
     - name: APP_GIT_CONTEXT
       type: string
-    - name: APP_GIT_BRANCH
-      type: string
     - name: NAMESPACE
       type: string
   tasks:
@@ -21,7 +19,7 @@ spec:
         - name: url
           value: $(params.APP_GIT_URL)
         - name: revision
-          value: $(params.APP_GIT_BRANCH)
+          value: completed5.1
         - name: submodules
           value: 'true'
         - name: depth
