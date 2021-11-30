@@ -3,15 +3,15 @@
 #
 # Before building the docker image run:
 #
-# mvn package -Pnative -Dquarkus.native.container-build=true
+# mvn package -Pnative -Dnative-image.docker-build=true
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native -t quarkus/getting-started .
+# docker build -f src/main/docker/Dockerfile.native -t quarkus/inventory-quarkus .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/getting-started
+# docker run -i --rm -p 8080:8080 quarkus/inventory-quarkus
 #
 ###
 FROM registry.access.redhat.com/ubi8/ubi-minimal
