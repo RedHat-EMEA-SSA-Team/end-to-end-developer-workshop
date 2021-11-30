@@ -11,6 +11,7 @@ tkn pipeline start coolstore-java-pipeline -n ${NAMESPACE} \
     --param APP_NAME=catalog \
     --param APP_GIT_URL=https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git \
     --param APP_GIT_CONTEXT=labs/catalog-spring-boot \
+    --param APP_GIT_BRANCH=5.1 \
     --param NAMESPACE=${NAMESPACE}
 
 tkn pipeline start coolstore-java-pipeline -n ${NAMESPACE} \
@@ -19,6 +20,7 @@ tkn pipeline start coolstore-java-pipeline -n ${NAMESPACE} \
     --param APP_NAME=gateway \
     --param APP_GIT_URL=https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git \
     --param APP_GIT_CONTEXT=labs/gateway-vertx \
+    --param APP_GIT_BRANCH=5.1 \
     --param NAMESPACE=${NAMESPACE}
 
 tkn pipeline start coolstore-nodejs-pipeline -n ${NAMESPACE} \
@@ -27,6 +29,7 @@ tkn pipeline start coolstore-nodejs-pipeline -n ${NAMESPACE} \
     --param APP_NAME=web \
     --param APP_GIT_URL=https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git \
     --param APP_GIT_CONTEXT=labs/web-nodejs \
+    --param APP_GIT_BRANCH=5.1 \
     --param NAMESPACE=${NAMESPACE}
 
 while [ $(tkn pipelinerun list -n ${NAMESPACE} --no-headers | grep -i "running" | wc -l) -gt 0 ]
