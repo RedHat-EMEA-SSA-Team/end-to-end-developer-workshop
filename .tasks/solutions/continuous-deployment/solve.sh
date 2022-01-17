@@ -36,19 +36,13 @@ spec:
       - secretRef:
           name: argocd-env-secret  # used for authentication (username/password or auth token)
   steps:
-    - name: login
+    - name: login-sync-and-wait
       image: argoproj/argocd:v1.7.6
       script: |
         if [ -z $ARGOCD_AUTH_TOKEN ]; then
           yes | argocd login \$ARGOCD_SERVER --username=\$ARGOCD_USERNAME --password=\$ARGOCD_PASSWORD --plaintext;
         fi
-    - name: sync
-      image: argoproj/argocd:v1.7.6
-      script: |
         argocd app sync \$(params.application-name)${USER_ID}
-    - name: wait
-      image: argoproj/argocd:v1.7.6
-      script: |
         argocd app wait \$(params.application-name)${USER_ID} --health
 EOF
 
