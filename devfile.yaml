@@ -165,7 +165,7 @@ commands:
   - name: 'Catalog - Add PodAffinity'
     actions:
       - command: >-
-          oc patch dc/catalog-coolstore -n my-project${CHE_WORKSPACE_NAMESPACE#user} --patch '{"spec": {"template": {"spec": {"affinity": {"podAffinity": {"requiredDuringSchedulingIgnoredDuringExecution": [{"labelSelector": { "matchExpressions": [{"key" : "deploymentconfig", "operator" : "In", "values": ["catalog-coolstore"]}]}, "topologyKey" : "kubernetes.io/hostname"}]}}}}}}'
+          oc patch deployment/catalog-coolstore -n my-project${CHE_WORKSPACE_NAMESPACE#user} --patch '{"spec": {"template": {"spec": {"affinity": {"podAffinity": {"requiredDuringSchedulingIgnoredDuringExecution": [{"labelSelector": { "matchExpressions": [{"key" : "component", "operator" : "In", "values": ["catalog"]}]}, "topologyKey" : "kubernetes.io/hostname"}]}}}}}}'
         type: exec
         workdir: /projects/workshop/labs/catalog-spring-boot
         component: workshop-tools
