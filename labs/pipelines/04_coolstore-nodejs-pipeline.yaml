@@ -62,5 +62,14 @@ spec:
       taskRef:
         kind: Task
         name: argocd-task-sync-and-wait
+    - name: openshift-client
+      params:
+        - name: SCRIPT
+          value: oc rollout status deployment/$(params.APP_NAME)-coolstore
+      runAfter:
+        - argocd-task-sync-and-wait
+      taskRef:
+        kind: ClusterTask
+        name: openshift-client
   workspaces:
     - name: shared-workspace
