@@ -9,7 +9,7 @@ projects:
     source:
       location: 'https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git'
       type: github
-      branch: '6.0'
+      branch: '6.1'
 components:
   - type: chePlugin
     id: redhat/java11/latest
@@ -17,17 +17,15 @@ components:
       java.server.launchMode: Standard
       java.autobuild.enabled: false
   - type: dockerimage
-    image: 'quay.io/redhat-emea-ssa-team/workshop-tools:6.0'
+    image: 'quay.io/redhat-emea-ssa-team/workshop-tools:6.1'
     alias: workshop-tools
-    memoryLimit: "3072M"
+    memoryLimit: "2084M"
     mountSources: true
     env:
       - name: MAVEN_OPTS
         value: '-Xmx2048m -Duser.home=/home/developer'
       - name: MAVEN_MIRROR_URL
         value: http://nexus.opentlc-shared.svc:8081/repository/maven-all-public
-      - value: 'quay.io/phmartin/odo-init-container:issue4822-2'
-        name: ODO_BOOTSTRAPPER_IMAGE
     endpoints:
        - name: 8080-port
          port: 8080
