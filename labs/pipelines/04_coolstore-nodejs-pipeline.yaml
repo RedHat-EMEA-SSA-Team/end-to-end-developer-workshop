@@ -36,8 +36,6 @@ spec:
           workspace: shared-workspace
     - name: s2i-nodejs
       params:
-        - name: VERSION
-          value: '12'
         - name: PATH_CONTEXT
           value: $(params.APP_GIT_CONTEXT)
         - name: TLSVERIFY
