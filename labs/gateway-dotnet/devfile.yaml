@@ -36,6 +36,10 @@ components:
       apiVersion: route.openshift.io/v1
       metadata:
         name: gateway-coolstore
+      labels:
+        app.kubernetes.io/instance: gateway
+        app.kubernetes.io/part-of: coolstore
+        app: coolstore
       spec:
         path: /
         to:
