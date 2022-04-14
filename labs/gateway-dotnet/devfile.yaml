@@ -29,9 +29,27 @@ commands:
     workingDir: /projects
   id: run
 components:
-- container:
+- name: gateway
+  kubernetes:
+    inlined: |
+      kind: Route
+      apiVersion: route.openshift.io/v1
+      metadata:
+        name: gateway-coolstore
+        labels:
+          app.kubernetes.io/instance: gateway
+          app: coolstore
+      spec:
+        path: /
+        to:
+          kind: Service
+          name: gateway-coolstore
+        port:
+          targetPort: 8080
+- name: dotnet
+  container:        
     endpoints:
-    - exposure: public
+    - exposure: internal
       name: gateway
       path: /
       protocol: http
@@ -47,4 +65,3 @@ components:
       value: http://*:8080
     image: registry.access.redhat.com/ubi8/dotnet-31:3.1
     mountSources: true
-  name: dotnet
