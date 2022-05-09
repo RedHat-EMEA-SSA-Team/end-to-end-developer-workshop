@@ -9,7 +9,6 @@ spec:
   resources:
     requests:
       storage: 512Mi
-  storageClassName: gp2
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -21,7 +20,6 @@ spec:
   resources:
     requests:
       storage: 512Mi
-  storageClassName: gp2
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -33,7 +31,6 @@ spec:
   resources:
     requests:
       storage: 512Mi
-  storageClassName: gp2
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -45,4 +42,3 @@ spec:
   resources:
     requests:
       storage: 512Mi
-  storageClassName: gp2
