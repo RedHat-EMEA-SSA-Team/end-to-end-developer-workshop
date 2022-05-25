@@ -54,8 +54,6 @@ components:
           path: /home/jboss/.m2
         - name: gradle
           path: /home/jboss/.gradle
-        - name: remote-endpoint
-          path: /remote-endpoint
         - name: plugins
           path: /plugins
     name: workshop-tools
