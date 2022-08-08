@@ -1,6 +1,6 @@
 schemaVersion: 2.1.0
 metadata:
-  name: wksp-end-to-end-dev2
+  name: wksp-end-to-end-dev
 attributes:
   .che/che-theia-plugins.yaml: |
     - id: redhat/java11/latest
@@ -17,8 +17,6 @@ attributes:
     }
   dw.metadata.annotations:
     che.eclipse.org/che-editor: che-incubator/che-code/insiders
-    che.eclipse.org/last-updated-timestamp: '2022-08-08T11:57:50.279Z'
-    controller.devfile.io/devworkspace_id_override: workspacef863jrw4hfusmam8
   extensions.ignoreRecommendations: 'true'
   metadata-name-field: name
   security.workspace.trust: 'false'
