@@ -60,7 +60,8 @@ components:
   - name: kubefolder
     volume: {}
   - name: m2
-    volume: {}
+    volume: 
+      size: 1G
   - name: gradle
     volume: {}
 commands:
