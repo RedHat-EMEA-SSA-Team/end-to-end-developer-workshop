@@ -1,6 +1,6 @@
 schemaVersion: 2.1.0
 metadata:
-  name: wksp-end-to-end-dev
+  name: wksp-end-to-end-dev2
 attributes:
   .che/che-theia-plugins.yaml: |
     - id: redhat/java11/latest
