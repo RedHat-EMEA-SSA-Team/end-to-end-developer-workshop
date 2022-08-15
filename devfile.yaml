@@ -70,8 +70,6 @@ components:
           value: '-Xmx2048m -Duser.home=/home/developer'
         - name: MAVEN_MIRROR_URL
           value: 'http://nexus.opentlc-shared.svc:8081/repository/maven-all-public'
-        - name: CHE_PLUGIN_REGISTRY_INTERNAL_URL
-          value: 'http://plugin-registry.dogfooding.svc:8080/v3'
       image: 'quay.io/redhat-emea-ssa-team/workshop-tools:6.1'      
       memoryLimit: 2048Mi
       memoryRequest: 256Mi
