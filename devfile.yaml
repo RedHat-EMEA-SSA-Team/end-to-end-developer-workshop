@@ -20,15 +20,6 @@ attributes:
   extensions.ignoreRecommendations: 'true'
   metadata-name-field: name
   security.workspace.trust: 'false'
-projects:
-  - attributes:
-      source-origin: branch
-    git:
-      checkoutFrom:
-        revision: '6.2'
-      remotes:
-        origin: 'https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git'
-    name: workshop
 components:
   - attributes:
       che-code.eclipse.org/contribute-cpuLimit: true
