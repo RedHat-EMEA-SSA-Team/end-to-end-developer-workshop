@@ -15,21 +15,17 @@ attributes:
         "redhat/java11"
       ]
     }
-  dw.metadata.annotations:
-    che.eclipse.org/che-editor: che-incubator/che-code/insiders
-  extensions.ignoreRecommendations: 'true'
-  metadata-name-field: name
-  security.workspace.trust: 'false'
-components:
+projects:
   - attributes:
-      che-code.eclipse.org/contribute-cpuLimit: true
-      che-code.eclipse.org/contribute-cpuRequest: true
-      che-code.eclipse.org/contribute-entry-point: true
-      che-code.eclipse.org/contribute-memoryLimit: true
-      che-code.eclipse.org/contribute-memoryRequest: true
-      che-code.eclipse.org/contributed-container: workshop-tools
-      che-code.eclipse.org/original-memoryLimit: 2084M
-    container:
+      source-origin: branch
+    git:
+      checkoutFrom:
+        revision: '6.2'
+      remotes:
+        origin: 'https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git'
+    name: workshop
+components:
+  - container:
       args:
         - sh
         - '-c'
@@ -221,5 +217,3 @@ commands:
       label: OpenShift - Cleanup
       workingDir: /projects/workshop
     id: openshift---cleanup
-
-
