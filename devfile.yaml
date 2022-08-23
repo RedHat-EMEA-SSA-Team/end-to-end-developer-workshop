@@ -57,7 +57,7 @@ components:
           value: '-Xmx2048m -Duser.home=/home/developer'
         - name: MAVEN_MIRROR_URL
           value: 'http://nexus.opentlc-shared.svc:8081/repository/maven-all-public'
-      image: 'quay.io/redhat-emea-ssa-team/workshop-tools:6.1'      
+      image: 'quay.io/redhat-emea-ssa-team/workshop-tools:6.2'      
       memoryLimit: 2048Mi
       memoryRequest: 256Mi
       mountSources: true
