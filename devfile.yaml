@@ -29,7 +29,9 @@ components:
       args:
         - sh
         - '-c'
-        - '${PLUGIN_REMOTE_ENDPOINT_EXECUTABLE}'
+        - /checode/entrypoint-volume.sh
+      command:
+        - /home/developer/entrypoint.sh  
       cpuLimit: 1000m
       cpuRequest: 50m
       endpoints:
@@ -66,7 +68,7 @@ components:
         - name: kubefolder
           path: /home/developer/.kube
         - name: m2
-          path: /home/jboss/.m2
+          path: /home/developer/.m2
     name: workshop-tools
   - name: kubefolder
     volume: {}
