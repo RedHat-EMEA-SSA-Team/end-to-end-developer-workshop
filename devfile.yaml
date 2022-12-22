@@ -1,20 +1,6 @@
 schemaVersion: 2.1.0
 metadata:
   name: wksp-end-to-end-dev
-attributes:
-  .che/che-theia-plugins.yaml: |
-    - id: redhat/java11/latest
-      override:
-        sidecar: {}
-        preferences:
-          java.autobuild.enabled: false
-          java.server.launchMode: Standard
-  .vscode/extensions.json: |-
-    {
-      "recommendations": [
-        "redhat/java11"
-      ]
-    }
 projects:
   - attributes:
       source-origin: branch
@@ -65,13 +51,9 @@ components:
       mountSources: true
       sourceMapping: /projects
       volumeMounts:
-        - name: kubefolder
-          path: /home/developer/.kube
         - name: m2
           path: /home/developer/.m2
     name: workshop-tools
-  - name: kubefolder
-    volume: {}
   - name: m2
     volume:
       size: 1G    
