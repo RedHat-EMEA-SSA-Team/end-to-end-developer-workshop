@@ -15,9 +15,7 @@ components:
       args:
         - sh
         - '-c'
-        - /checode/entrypoint-volume.sh
-      command:
-        - /home/developer/entrypoint.sh  
+        - '${PLUGIN_REMOTE_ENDPOINT_EXECUTABLE}'
       cpuLimit: 1000m
       cpuRequest: 50m
       endpoints:
@@ -140,7 +138,7 @@ commands:
       commandLine: 'oc patch deployment/catalog-coolstore -n my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14} --patch ''{"spec": {"template": {"spec": {"affinity": {"podAffinity": {"requiredDuringSchedulingIgnoredDuringExecution": [{"labelSelector": { "matchExpressions": [{"key" : "component", "operator" : "In", "values": ["catalog"]}]}, "topologyKey" : "kubernetes.io/hostname"}]}}}'''
       component: workshop-tools
       label: Catalog - Add PodAffinity
-      workingDir: /projects/workshop/labs/catalog-spring-boot
+      workingDir: /projects/workshop/labs
     id: catalog---add-podaffinity
   - exec:
       commandLine: 'oc project my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}; oc set probe deployment/gateway-coolstore  --liveness --readiness --period-seconds=5 --get-url=http://:8080/health;oc set probe deployment/web-coolstore  --liveness --readiness --period-seconds=5 --get-url=http://:8080/;echo "Health Probes Done"'
@@ -182,7 +180,7 @@ commands:
       commandLine: 'git init; git remote add origin http://gitea-server.gitea.svc:3000/${DEVWORKSPACE_NAMESPACE%-devspaces}/inventory-gitops.git 2> /dev/null; git add *; git commit -m "Initial Inventory GitOps"; git push http://${DEVWORKSPACE_NAMESPACE%-devspaces}:openshift@gitea-server.gitea.svc:3000/${DEVWORKSPACE_NAMESPACE%-devspaces}/inventory-gitops.git'
       component: workshop-tools
       label: GitOps - Commit Inventory
-      workingDir: /projects/workshop/labs/gitops/inventory-coolstore
+      workingDir: /projects/workshop/labs/gitops/inventory-quarkus
     id: gitops---commit-inventory
   - exec:
       commandLine: './gitops_commit_configure_coolstore.sh ${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}'
@@ -194,6 +192,7 @@ commands:
       commandLine: 'oc patch deployment/catalog-coolstore --patch ''{"spec": {"template": {"metadata": {"annotations": {"sidecar.istio.io/inject": "true"}}}'' -n cn-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14} && oc patch deployment/gateway-coolstore --patch ''{"spec": {"template": {"metadata": {"annotations": {"sidecar.istio.io/inject": "true"}}}'' -n cn-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14} '
       component: workshop-tools
       label: Service Mesh - Deploy Catalog and Gateway
+      workingDir: /projects/workshop/labs
     id: service-mesh---deploy-catalog-and-gateway
   - exec:
       commandLine: 'git checkout .; git clean -fd; git clean -f; oc delete project my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}; oc delete deployment,deploymentconfig,buildconfig,imagestream,route,secret,configmap,pvc,service,pipeline,pipelinerun --all --namespace cn-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}'
