@@ -6,7 +6,7 @@ projects:
       source-origin: branch
     git:
       checkoutFrom:
-        revision: '6.4'
+        revision: '6.5'
       remotes:
         origin: 'https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git'
     name: workshop
@@ -57,13 +57,13 @@ components:
       size: 1G    
 commands:
   - exec:
-      commandLine: 'odo login $(oc whoami --show-server) --username=${DEVWORKSPACE_NAMESPACE%-devspaces} --password=openshift --insecure-skip-tls-verify'
+      commandLine: 'oc login $(oc whoami --show-server) --username=${DEVWORKSPACE_NAMESPACE%-devspaces} --password=openshift --insecure-skip-tls-verify'
       component: workshop-tools
       label: OpenShift - Login
       workingDir: /projects/workshop
     id: openshift---login
   - exec:
-      commandLine: 'odo project create my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}'
+      commandLine: 'oc project create my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}'
       component: workshop-tools
       label: OpenShift - Create Development Project
       workingDir: /projects/workshop
@@ -117,17 +117,11 @@ commands:
       workingDir: /projects/workshop/labs/catalog-spring-boot
     id: catalog---push
   - exec:
-      commandLine: 'odo create --app coolstore --project my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}'
+      commandLine: 'oc new-app dotnet:6.0~https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop --context-dir=labs/gateway-dotnet -n my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14} --name=gateway-coolstore --labels=app=coolstore,app.kubernetes.io/instance=gateway,app.kubernetes.io/part-of=coolstore,app.kubernetes.io/name=gateway,app.openshift.io/runtime=dotnet && oc expose svc gateway -n my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}'
       component: workshop-tools
-      label: Gateway - Create Component
+      label: Gateway - Build and Deploy Component
       workingDir: /projects/workshop/labs/gateway-dotnet
-    id: gateway---create-component
-  - exec:
-      commandLine: odo push
-      component: workshop-tools
-      label: Gateway - Push
-      workingDir: /projects/workshop/labs/gateway-dotnet
-    id: gateway---push
+    id: gateway---build-and-deploy
   - exec:
       commandLine: 'for i in {1..60}; do if [ $(curl -s -w "%{http_code}" -o /dev/null http://catalog-coolstore.my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}.svc:8080/actuator/health) == "200" ]; then MSG="\\033[0;32mThe request to Catalog Service has succeeded\\033[0m"; else MSG="\\033[0;31mERROR - The request to Catalog Service has failed\\033[0m"; fi;echo -e $MSG;sleep 2s; done'
       component: workshop-tools

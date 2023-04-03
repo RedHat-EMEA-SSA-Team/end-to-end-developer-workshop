@@ -10,9 +10,8 @@ oc policy add-role-to-user view -z default
 
 cp $DIRECTORY/pom.xml $DIRECTORY/../../../labs/inventory-quarkus
 cd $DIRECTORY/../../../labs/inventory-quarkus
-mvn clean package -DskipTests
+mvn clean install -Dquarkus.kubernetes.deploy=true -DskipTests -Dcontainer-image.group=$(oc project -q)
 
-odo push
 oc label deployment inventory-coolstore app.openshift.io/runtime=quarkus --overwrite
 
 oc rollout pause deployment/inventory-coolstore

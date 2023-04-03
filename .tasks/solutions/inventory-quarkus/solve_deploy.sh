@@ -9,12 +9,7 @@ PROJECT_NAME=$1
 $DIRECTORY/solve.sh
 
 cd ${CONTEXT_FOLDER}
-mvn clean package -DskipTests
-
-odo delete --all --force
-odo project set ${PROJECT_NAME}
-odo create inventory --app coolstore
-odo push
+mvn clean install -Dquarkus.kubernetes.deploy=true -DskipTests -Dcontainer-image.group=$(oc project -q)
 
 oc label deployment inventory-coolstore app.openshift.io/runtime=quarkus --overwrite
 

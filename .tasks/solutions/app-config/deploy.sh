@@ -28,9 +28,8 @@ then
     cp $DIRECTORY/pom.xml $DIRECTORY/../../../labs/inventory-quarkus
     cp $DIRECTORY/application.properties $DIRECTORY/../../../labs/inventory-quarkus/src/main/resources
     cd $DIRECTORY/../../../labs/inventory-quarkus
-    mvn clean package -DskipTests
-
-    odo push
+    mvn clean install -Dquarkus.kubernetes.deploy=true -DskipTests -Dcontainer-image.group=$(oc project -q)
+    
     oc label deployment inventory-coolstore app.openshift.io/runtime=quarkus --overwrite
 
      cat <<EOF > ${CONTEXT_FOLDER}/inventory-openshift-application.properties
