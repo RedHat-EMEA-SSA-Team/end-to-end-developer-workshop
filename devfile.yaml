@@ -54,7 +54,7 @@ components:
     name: workshop-tools
   - name: m2
     volume:
-      size: 1G    
+      size: 10G    
 commands:
   - exec:
       commandLine: 'oc login $(oc whoami --show-server) --username=${DEVWORKSPACE_NAMESPACE%-devspaces} --password=openshift --insecure-skip-tls-verify'
@@ -63,7 +63,7 @@ commands:
       workingDir: /projects/workshop
     id: openshift---login
   - exec:
-      commandLine: 'oc project create my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}'
+      commandLine: 'oc new-project my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}'
       component: workshop-tools
       label: OpenShift - Create Development Project
       workingDir: /projects/workshop
