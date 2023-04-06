@@ -10,13 +10,13 @@ oc policy add-role-to-user view -z default
 
 cp $DIRECTORY/pom.xml $DIRECTORY/../../../labs/inventory-quarkus
 cd $DIRECTORY/../../../labs/inventory-quarkus
-mvn clean install -Dquarkus.kubernetes.deploy=true -DskipTests -Dcontainer-image.group=$(oc project -q)
+mvn clean install -Dquarkus.kubernetes.deploy=true -DskipTests -Dquarkus.container-image.group=$(oc project -q)
 
-oc label deployment inventory-coolstore app.openshift.io/runtime=quarkus --overwrite
+#oc label deployment inventory-coolstore app.openshift.io/runtime=quarkus --overwrite
 
 oc rollout pause deployment/inventory-coolstore
 oc set probe deployment/inventory-coolstore --readiness --initial-delay-seconds=10 --failure-threshold=3 --get-url=http://:8080/q/health/ready
-oc set probe deployment/inventory-coolstore --liveness --initial-delay-seconds=180 --failure-threshold=3 --get-url=http://:8080/q/health/live
+oc set probe deployment/inventory-coolstore --liveness --initial-delay-seconds=10 --failure-threshold=3 --get-url=http://:8080/q/health/live
 oc rollout resume deployment/inventory-coolstore
 
 echo "Inventory Service Health Probes Done"

@@ -114,23 +114,49 @@
                 <jkube.build.switchToDeployment>true</jkube.build.switchToDeployment>
               </jkube-openshift-deploymentconfig>
             </config>
+            <config>
+              <jkube-openshift-route>
+                <generateRoute>true</generateRoute>
+              </jkube-openshift-route>
+            </config>
           </enricher>
           <resources>
+          
+            <controller>
+              <controllerName>catalog-coolstore</controllerName>
+            </controller>
+
+            <services>
+              <service>
+              <name>catlog-coolstore</name>
+              </service>
+            </services>
+
               <labels>
                   <all>
                       <property>
-                          <name>app</name>
-                          <value>catalog-coolstore</value>
-                      </property>
-                      <property>
-                          <name> app.kubernetes.io/part-of</name>
+                          <name>app.kubernetes.io/part-of</name>
                           <value>coolstore</value>
                       </property>
+                      <property>
+                          <name>component</name>
+                          <value>catalog</value>
+                      </property>
+                  </all>
+                  <deployment>
                       <property>
                           <name>app.openshift.io/runtime</name>
                           <value>spring</value>
                       </property>
-                  </all>
+                      <property>
+                          <name>app.kubernetes.io/instance</name>
+                          <value>catalog</value>
+                      </property>
+                      <property>
+                          <name>app.kubernetes.io/name</name>
+                          <value>catalog</value>
+                      </property>
+                  </deployment>
               </labels>
           </resources>
         </configuration>

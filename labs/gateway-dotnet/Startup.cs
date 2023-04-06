@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using gateway.Controllers;
+using System.Text.Json.Serialization;
 
 namespace gateway
 {
@@ -28,7 +29,7 @@ namespace gateway
 
             services.AddControllers().AddJsonOptions(options=> 
             {  
-                  options.JsonSerializerOptions.IgnoreNullValues = true;
+                  options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
             });
 
             services.AddHealthChecks();

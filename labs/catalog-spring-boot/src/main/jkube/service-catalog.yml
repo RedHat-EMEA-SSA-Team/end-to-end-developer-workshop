@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: catalog
+    app.kubernetes.io/part-of: coolstore
+    component: catalog
+  name: catalog-coolstore
+spec:
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    component: catalog
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

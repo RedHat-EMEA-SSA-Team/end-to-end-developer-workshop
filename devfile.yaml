@@ -81,13 +81,7 @@ commands:
       workingDir: /projects/workshop/labs/inventory-quarkus
     id: inventory---build
   - exec:
-      commandLine: 'odo create --app coolstore --project my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}'
-      component: workshop-tools
-      label: Inventory - Create Component
-      workingDir: /projects/workshop/labs/inventory-quarkus
-    id: inventory---create-component
-  - exec:
-      commandLine: odo push
+      commandLine: mvn install -Dquarkus.kubernetes.deploy=true -DskipTests -Dquarkus.container-image.group=$(oc project -q)
       component: workshop-tools
       label: Inventory - Push
       workingDir: /projects/workshop/labs/inventory-quarkus
@@ -105,13 +99,7 @@ commands:
       workingDir: /projects/workshop/labs/catalog-spring-boot
     id: catalog---run
   - exec:
-      commandLine: 'odo create --app coolstore --project my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}'
-      component: workshop-tools
-      label: Catalog - Create Component
-      workingDir: /projects/workshop/labs/catalog-spring-boot
-    id: catalog---create-component
-  - exec:
-      commandLine: odo push
+      commandLine: mvn -DskipTests oc:build oc:resource oc:apply
       component: workshop-tools
       label: Catalog - Push
       workingDir: /projects/workshop/labs/catalog-spring-boot
@@ -128,12 +116,6 @@ commands:
       label: Catalog - Generate Traffic
       workingDir: /projects/workshop/labs/catalog-spring-boot
     id: catalog---generate-traffic
-  - exec:
-      commandLine: 'oc patch deployment/catalog-coolstore -n my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14} --patch ''{"spec": {"template": {"spec": {"affinity": {"podAffinity": {"requiredDuringSchedulingIgnoredDuringExecution": [{"labelSelector": { "matchExpressions": [{"key" : "component", "operator" : "In", "values": ["catalog"]}]}, "topologyKey" : "kubernetes.io/hostname"}]}}}'''
-      component: workshop-tools
-      label: Catalog - Add PodAffinity
-      workingDir: /projects/workshop/labs
-    id: catalog---add-podaffinity
   - exec:
       commandLine: 'oc project my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}; oc set probe deployment/gateway-coolstore  --liveness --readiness --period-seconds=5 --get-url=http://:8080/health;oc set probe deployment/web-coolstore  --liveness --readiness --period-seconds=5 --get-url=http://:8080/;echo "Health Probes Done"'
       component: workshop-tools
