@@ -81,11 +81,17 @@ commands:
       workingDir: /projects/workshop/labs/inventory-quarkus
     id: inventory---build
   - exec:
-      commandLine: mvn install -Dquarkus.kubernetes.deploy=true -DskipTests -Dquarkus.container-image.group=$(oc project -q)
+      commandLine: mvn package -Dquarkus.container-image.build=true -DskipTests -Dquarkus.container-image.group=$(oc project -q)
       component: workshop-tools
       label: Inventory - Push
       workingDir: /projects/workshop/labs/inventory-quarkus
     id: inventory---push
+  - exec:
+      commandLine: mvn install -Dquarkus.kubernetes.deploy=true -DskipTests -Dquarkus.container-image.group=$(oc project -q)
+      component: workshop-tools
+      label: Inventory - Create Component
+      workingDir: /projects/workshop/labs/inventory-quarkus
+    id: inventory---create-component
   - exec:
       commandLine: mvn clean package -DskipTests
       component: workshop-tools
@@ -99,11 +105,17 @@ commands:
       workingDir: /projects/workshop/labs/catalog-spring-boot
     id: catalog---run
   - exec:
-      commandLine: mvn -DskipTests oc:build oc:resource oc:apply
+      commandLine: mvn package -DskipTests oc:build
       component: workshop-tools
       label: Catalog - Push
       workingDir: /projects/workshop/labs/catalog-spring-boot
     id: catalog---push
+  - exec:
+      commandLine: mvn package -DskipTests oc:build oc:resource oc:apply
+      component: workshop-tools
+      label: Catalog - Create Component
+      workingDir: /projects/workshop/labs/catalog-spring-boot
+    id: catalog---create-component
   - exec:
       commandLine: 'oc new-app dotnet:6.0~https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop --context-dir=labs/gateway-dotnet -n my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14} --name=gateway-coolstore --labels=app=coolstore,app.kubernetes.io/instance=gateway,app.kubernetes.io/part-of=coolstore,app.kubernetes.io/name=gateway,app.openshift.io/runtime=dotnet && oc expose svc gateway -n my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}'
       component: workshop-tools
