@@ -115,6 +115,8 @@ do
         yq delete --inplace  ${DEPLOYMENTCONFIG_YAML} items[*].spec.template.spec.containers[0].volumeMounts
         yq delete --inplace  ${DEPLOYMENTCONFIG_YAML} items[*].spec.template.spec.containers[0].env
         yq delete --inplace  ${DEPLOYMENTCONFIG_YAML} items[*].spec.template.spec.volumes
+        yq delete --inplace  ${DEPLOYMENTCONFIG_YAML} items[*].spec.template.spec.serviceAccount
+        yq delete --inplace  ${DEPLOYMENTCONFIG_YAML} items[*].spec.template.spec.serviceAccountName
         yq delete --inplace  ${DEPLOYMENTCONFIG_YAML} items[*].status
         yq write --inplace ${DEPLOYMENTCONFIG_YAML} items[*].spec.triggers null
 
@@ -153,6 +155,8 @@ do
         yq delete --inplace  ${DEPLOYMENT_YAML} items[*].spec.template.spec.containers[0].volumeMounts
         yq delete --inplace  ${DEPLOYMENT_YAML} items[*].spec.template.spec.containers[0].env
         yq delete --inplace  ${DEPLOYMENT_YAML} items[*].spec.template.spec.volumes
+        yq delete --inplace  ${DEPLOYMENT_YAML} items[*].spec.template.spec.serviceAccount
+        yq delete --inplace  ${DEPLOYMENT_YAML} items[*].spec.template.spec.serviceAccountName
         yq delete --inplace  ${DEPLOYMENT_YAML} items[*].status
 
         # Specific changes for Staging Environment with Istio
