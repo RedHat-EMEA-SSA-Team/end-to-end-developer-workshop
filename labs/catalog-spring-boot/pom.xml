@@ -142,15 +142,15 @@
                           <name>component</name>
                           <value>catalog</value>
                       </property>
+                      <property>
+                          <name>app.kubernetes.io/instance</name>
+                          <value>catalog</value>
+                      </property>                  
                   </all>
                   <deployment>
                       <property>
                           <name>app.openshift.io/runtime</name>
                           <value>spring</value>
-                      </property>
-                      <property>
-                          <name>app.kubernetes.io/instance</name>
-                          <value>catalog</value>
                       </property>
                       <property>
                           <name>app.kubernetes.io/name</name>
