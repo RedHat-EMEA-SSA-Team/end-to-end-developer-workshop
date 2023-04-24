@@ -12,18 +12,19 @@ if [ $? -eq 0 ]
 then
     oc policy add-role-to-user view -z default
 
-    oc process -n openshift postgresql-ephemeral --param=DATABASE_SERVICE_NAME=catalog-postgresql \
+    oc get template -n openshift postgresql-ephemeral -o yaml | sed "s/namespace: openshift/namespace: ${PROJECT_NAME}/" | \
+    oc process  --param=DATABASE_SERVICE_NAME=catalog-postgresql \
             --param=POSTGRESQL_DATABASE=catalogdb --param=POSTGRESQL_USER=catalog \
             --param=POSTGRESQL_PASSWORD=catalog \
-            --labels=app=coolstore,app.kubernetes.io/instance=catalog-postgresql,app.kubernetes.io/name=postgresql,app.kubernetes.io/part-of=coolstore,app.openshift.io/runtime=postgresql \
+            --labels=app=coolstore,app.kubernetes.io/instance=catalog-postgresql,app.kubernetes.io/name=postgresql,app.kubernetes.io/part-of=coolstore,app.openshift.io/runtime=postgresql -f -\
             | oc create -f -
 
-    oc process -n openshift mariadb-ephemeral --param=DATABASE_SERVICE_NAME=inventory-mariadb \
+    oc get template -n openshift mariadb-ephemeral  -o yaml | sed "s/namespace: openshift/namespace: ${PROJECT_NAME}/" | \
+    oc process --param=DATABASE_SERVICE_NAME=inventory-mariadb \
             --param=MYSQL_DATABASE=inventorydb --param=MYSQL_USER=inventory \
             --param=MYSQL_PASSWORD=inventory --param=MYSQL_ROOT_PASSWORD=inventoryadmin \
-            --labels=app=coolstore,app.kubernetes.io/instance=inventory-mariadb,app.kubernetes.io/name=mariadb,app.kubernetes.io/part-of=coolstore,app.openshift.io/runtime=mariadb \
+            --labels=app=coolstore,app.kubernetes.io/instance=inventory-mariadb,app.kubernetes.io/name=mariadb,app.kubernetes.io/part-of=coolstore,app.openshift.io/runtime=mariadb -f -\
             | oc create -f -
-
 
     cp $DIRECTORY/pom.xml $DIRECTORY/../../../labs/inventory-quarkus
     cp $DIRECTORY/application.properties $DIRECTORY/../../../labs/inventory-quarkus/src/main/resources
