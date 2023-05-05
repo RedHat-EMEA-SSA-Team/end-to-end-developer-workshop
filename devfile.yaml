@@ -168,7 +168,7 @@ commands:
       commandLine: 'git init; git remote add origin http://gitea-server.gitea.svc:3000/${DEVWORKSPACE_NAMESPACE%-devspaces}/inventory-gitops.git 2> /dev/null; git add *; git commit -m "Initial Inventory GitOps"; git push http://${DEVWORKSPACE_NAMESPACE%-devspaces}:openshift@gitea-server.gitea.svc:3000/${DEVWORKSPACE_NAMESPACE%-devspaces}/inventory-gitops.git'
       component: workshop-tools
       label: GitOps - Commit Inventory
-      workingDir: /projects/workshop/labs/gitops/inventory-quarkus
+      workingDir: /projects/workshop/labs/gitops/inventory-coolstore
     id: gitops---commit-inventory
   - exec:
       commandLine: './gitops_commit_configure_coolstore.sh ${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}'
