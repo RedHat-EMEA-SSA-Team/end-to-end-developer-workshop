@@ -83,15 +83,15 @@ commands:
   - exec:
       commandLine: mvn package -Dquarkus.container-image.build=true -DskipTests -Dquarkus.container-image.group=$(oc project -q)
       component: workshop-tools
-      label: Inventory - Push
+      label: Inventory - Push Component
       workingDir: /projects/workshop/labs/inventory-quarkus
-    id: inventory---push
+    id: inventory---push-component
   - exec:
       commandLine: mvn install -Dquarkus.kubernetes.deploy=true -DskipTests -Dquarkus.container-image.group=$(oc project -q)
       component: workshop-tools
-      label: Inventory - Create Component
+      label: Inventory - Deploy Component
       workingDir: /projects/workshop/labs/inventory-quarkus
-    id: inventory---create-component
+    id: inventory---deploy-component
   - exec:
       commandLine: mvn clean package -DskipTests
       component: workshop-tools
@@ -105,29 +105,23 @@ commands:
       workingDir: /projects/workshop/labs/catalog-spring-boot
     id: catalog---run
   - exec:
-      commandLine: mvn package -DskipTests oc:build
-      component: workshop-tools
-      label: Catalog - Push
-      workingDir: /projects/workshop/labs/catalog-spring-boot
-    id: catalog---push
-  - exec:
       commandLine: mvn package -DskipTests oc:build oc:resource oc:apply
       component: workshop-tools
-      label: Catalog - Create Component
+      label: Catalog - Deploy Component
       workingDir: /projects/workshop/labs/catalog-spring-boot
-    id: catalog---create-component
+    id: catalog---deploy-component
   - exec:
-      commandLine: 'oc new-app dotnet:6.0~https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop --context-dir=labs/gateway-dotnet -n my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14} --name=gateway-coolstore --labels=app=coolstore,app.kubernetes.io/instance=gateway,app.kubernetes.io/part-of=coolstore,app.kubernetes.io/name=gateway,app.openshift.io/runtime=dotnet && oc expose svc gateway -n my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}'
+      commandLine: 'oc new-build dotnet:6.0 --name gateway-coolstore --labels=component=gateway --env DOTNET_STARTUP_PROJECT=app.csproj --binary=true && oc start-build gateway-coolstore --from-dir=. -w -n my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14} && oc new-app gateway-coolstore:latest --name gateway-coolstore  --labels=app=coolstore,app.kubernetes.io/instance=gateway,app.kubernetes.io/part-of=coolstore,app.kubernetes.io/name=gateway,app.openshift.io/runtime=dotnet,component=gateway -n my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14} && oc expose svc gatewY-COOLSTORE -n my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}'
       component: workshop-tools
       label: Gateway - Build and Deploy Component
       workingDir: /projects/workshop/labs/gateway-dotnet
     id: gateway---build-and-deploy
   - exec:
-      commandLine: 'for i in {1..60}; do if [ $(curl -s -w "%{http_code}" -o /dev/null http://catalog-coolstore.my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}.svc:8080/actuator/health) == "200" ]; then MSG="\\033[0;32mThe request to Catalog Service has succeeded\\033[0m"; else MSG="\\033[0;31mERROR - The request to Catalog Service has failed\\033[0m"; fi;echo -e $MSG;sleep 2s; done'
+      commandLine: 'for i in {1..60}; do if [ $(curl -s -w "%{http_code}" -o /dev/null http://inventory-coolstore.my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}.svc:8080/api/inventory/329299) == "200" ]; then MSG="\\033[0;32mThe request to Inventory Service has succeeded\\033[0m"; else MSG="\\033[0;31mERROR - The request to Inventory Service has failed\\033[0m"; fi;echo -e $MSG;sleep 1s; done'
       component: workshop-tools
-      label: Catalog - Generate Traffic
-      workingDir: /projects/workshop/labs/catalog-spring-boot
-    id: catalog---generate-traffic
+      label: Inventory - Generate Traffic
+      workingDir: /projects/workshop/labs/inventory-quarkus
+    id: inventory---generate-traffic
   - exec:
       commandLine: 'oc project my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}; oc set probe deployment/gateway-coolstore  --liveness --readiness --period-seconds=5 --get-url=http://:8080/health;oc set probe deployment/web-coolstore  --liveness --readiness --period-seconds=5 --get-url=http://:8080/;echo "Health Probes Done"'
       component: workshop-tools
