@@ -57,7 +57,7 @@ components:
       size: 10G    
 commands:
   - exec:
-      commandLine: 'oc login $(oc whoami --show-server) --username=${DEVWORKSPACE_NAMESPACE%-devspaces} --password=openshift --insecure-skip-tls-verify'
+      commandLine: 'oc login $(oc whoami --show-server) --username=${DEVWORKSPACE_NAMESPACE%-devspaces} --password=openshift --insecure-skip-tls-verify && oc project my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14} 2> /dev/null'
       component: workshop-tools
       label: OpenShift - Login
       workingDir: /projects/workshop
