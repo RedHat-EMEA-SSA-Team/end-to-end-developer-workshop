@@ -111,7 +111,7 @@ commands:
       workingDir: /projects/workshop/labs/catalog-spring-boot
     id: catalog---deploy-component
   - exec:
-      commandLine: 'oc new-build dotnet:6.0 --name gateway-coolstore --labels=component=gateway --env DOTNET_STARTUP_PROJECT=app.csproj --binary=true && oc start-build gateway-coolstore --from-dir=. -w -n my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14} && oc new-app gateway-coolstore:latest --name gateway-coolstore  --labels=app=coolstore,app.kubernetes.io/instance=gateway,app.kubernetes.io/part-of=coolstore,app.kubernetes.io/name=gateway,app.openshift.io/runtime=dotnet,component=gateway -n my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14} && oc expose svc gatewY-COOLSTORE -n my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}'
+      commandLine: 'oc new-build dotnet:6.0 --name gateway-coolstore --labels=component=gateway --env DOTNET_STARTUP_PROJECT=app.csproj --binary=true && oc start-build gateway-coolstore --from-dir=. -w -n my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14} && oc new-app gateway-coolstore:latest --name gateway-coolstore  --labels=app=coolstore,app.kubernetes.io/instance=gateway,app.kubernetes.io/part-of=coolstore,app.kubernetes.io/name=gateway,app.openshift.io/runtime=dotnet,component=gateway -n my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14} && oc expose svc gateway-coolstore -n my-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-14}'
       component: workshop-tools
       label: Gateway - Build and Deploy Component
       workingDir: /projects/workshop/labs/gateway-dotnet
