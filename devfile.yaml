@@ -1,4 +1,4 @@
-schemaVersion: 2.1.0
+schemaVersion: 2.2.0
 metadata:
   name: wksp-end-to-end-dev
 projects:
@@ -6,16 +6,12 @@ projects:
       source-origin: branch
     git:
       checkoutFrom:
-        revision: '6.5'
+        revision: '6.6'
       remotes:
         origin: 'https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git'
     name: workshop
 components:
   - container:
-      args:
-        - sh
-        - '-c'
-        - '${PLUGIN_REMOTE_ENDPOINT_EXECUTABLE}'
       cpuLimit: 1000m
       cpuRequest: 50m
       endpoints:
