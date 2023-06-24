@@ -77,13 +77,13 @@ commands:
       workingDir: /projects/workshop/labs/inventory-quarkus
     id: inventory---build
   - exec:
-      commandLine: mvn package -Dquarkus.container-image.build=true -DskipTests -Dquarkus.container-image.group=$(oc project -q)
+      commandLine: mvn package -Dquarkus.container-image.build=true -DskipTests -Dquarkus.container-image.group=$(oc project -q)  -Dquarkus.kubernetes-client.trust-certs=true
       component: workshop-tools
       label: Inventory - Push Component
       workingDir: /projects/workshop/labs/inventory-quarkus
     id: inventory---push-component
   - exec:
-      commandLine: mvn install -Dquarkus.kubernetes.deploy=true -DskipTests -Dquarkus.container-image.group=$(oc project -q)
+      commandLine: mvn install -Dquarkus.kubernetes.deploy=true -DskipTests -Dquarkus.container-image.group=$(oc project -q)  -Dquarkus.kubernetes-client.trust-certs=true
       component: workshop-tools
       label: Inventory - Deploy Component
       workingDir: /projects/workshop/labs/inventory-quarkus
