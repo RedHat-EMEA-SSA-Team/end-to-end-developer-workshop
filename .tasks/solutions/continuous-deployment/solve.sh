@@ -4,7 +4,7 @@
 
 DIRECTORY=`dirname $0`
 USER_ID=$1
-GITEA_URL=http://gitea-server.gitea.svc:3000
+GITEA_URL=https://gitea-server.gitea.svc:3000
 
 oc project cn-project${USER_ID}
 

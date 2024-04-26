@@ -11,8 +11,8 @@ echo "--- ArgoCD Applications for GitOps ---"
 /projects/workshop/.tasks/gitops_export_coolstore.sh my-project${USER_ID} cn-project${USER_ID}
 
 #Gitea initialization
-GITEA_URL=http://gitea-server.gitea.svc:3000
-GITEA_URL_WITH_CREDENTIALS=http://user${USER_ID}:openshift@gitea-server.gitea.svc:3000
+GITEA_URL=https://gitea-server.gitea.svc:3000
+GITEA_URL_WITH_CREDENTIALS=https://user${USER_ID}:openshift@gitea-server.gitea.svc:3000
 
 declare -a COMPONENTS=("inventory" "catalog" "gateway" "web")
 

@@ -8,8 +8,8 @@ USER_ID=$1
 
 oc project cn-project${USER_ID}
 
-GITEA_URL=http://gitea-server.gitea.svc:3000
-GITEA_URL_WITH_CREDENTIALS=http://user${USER_ID}:openshift@gitea-server.gitea.svc:3000
+GITEA_URL=https://gitea-server.gitea.svc:3000
+GITEA_URL_WITH_CREDENTIALS=https://user${USER_ID}:openshift@gitea-server.gitea.svc:3000
 
 curl -X DELETE ${GITEA_URL_WITH_CREDENTIALS}/api/v1/repos/user${USER_ID}/inventory-quarkus \
     -H  "accept: application/json" \
@@ -54,7 +54,7 @@ spec:
     - name: git-clone
       params:
         - name: url
-          value: 'http://gitea-server.gitea.svc:3000/user${USER_ID}/inventory-quarkus.git'
+          value: 'https://gitea-server.gitea.svc:3000/user${USER_ID}/inventory-quarkus.git'
         - name: revision
           value: master
         - name: submodules
