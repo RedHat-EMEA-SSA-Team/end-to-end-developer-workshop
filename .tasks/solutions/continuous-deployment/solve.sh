@@ -37,7 +37,7 @@ spec:
           name: argocd-env-secret  # used for authentication (username/password or auth token)
   steps:
     - name: login-sync-and-wait
-      image: argoproj/argocd:v1.7.6
+      image: quay.io/argoproj/argocd:v2.2.2
       script: |
         if [ -z $ARGOCD_AUTH_TOKEN ]; then
           yes | argocd login \$ARGOCD_SERVER --username=\$ARGOCD_USERNAME --password=\$ARGOCD_PASSWORD --plaintext;
