@@ -23,7 +23,7 @@ metadata:
     tekton.dev/displayName: "argocd"
 spec:
   description: >-
-    This task syncs (deploys) an Argo CD application and waits for it to be healthy.
+    As part of the Outer Loop lab this task syncs (deploys) an Argo CD application and waits for it to be healthy.
     To do so, it requires the address of the Argo CD server and some form of
     authentication either a username/password or an authentication token.
   params:
