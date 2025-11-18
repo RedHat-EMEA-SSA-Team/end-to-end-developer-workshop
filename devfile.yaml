@@ -37,7 +37,7 @@ components:
       env:
         - name: MAVEN_OPTS
           value: '-Xmx2048m -Duser.home=/home/developer'
-      image: 'quay.io/redhat-emea-ssa-team/workshop-tools:6.8'      
+      image: 'quay.io/redhat-emea-ssa-team/workshop-tools:6.9'      
       memoryLimit: 2048Mi
       memoryRequest: 256Mi
       mountSources: true
