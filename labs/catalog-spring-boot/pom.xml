@@ -109,6 +109,9 @@
             <includes>
             <include>jkube-openshift-deploymentconfig</include>
             </includes>          
+            <excludes>
+              <exclude>jkube-prometheus</exclude>
+            </excludes>
             <config>
               <jkube-openshift-deploymentconfig>
                 <jkube.build.switchToDeployment>true</jkube.build.switchToDeployment>

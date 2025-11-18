@@ -12,6 +12,12 @@ echo -e "Revert any local file changes"
 git checkout .
 git clean -f
 
+#clean up any local file changes and revert to git versions
+echo -e "Revert any local file changes"
+git checkout .
+git clean -f
+
+
 $DIRECTORY/solutions/inventory-quarkus/solve_deploy.sh ${PROJECT_NAME}
 $DIRECTORY/solutions/catalog-spring-boot/solve_deploy.sh ${PROJECT_NAME}
 $DIRECTORY/solutions/gateway-dotnet/deploy.sh ${PROJECT_NAME}
