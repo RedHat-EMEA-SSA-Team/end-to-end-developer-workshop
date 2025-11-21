@@ -90,6 +90,8 @@ spec:
           workspace: shared-workspace
     - name: s2i-java
       params:
+        - name: VERSION
+          value: openjdk-21-ubi8
         - name: PATH_CONTEXT
           value: .
         - name: TLSVERIFY
