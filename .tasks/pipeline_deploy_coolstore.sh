@@ -2,6 +2,7 @@
 
 DIRECTORY=`dirname $0`
 NAMESPACE=$1
+GIT_BRANCH=$(git branch --show-current)
 
 oc apply -f ${DIRECTORY}/../labs/pipelines -n ${NAMESPACE}
 
@@ -11,6 +12,7 @@ tkn pipeline start coolstore-java-pipeline -n ${NAMESPACE} \
     --param APP_NAME=catalog \
     --param APP_GIT_URL=https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git \
     --param APP_GIT_CONTEXT=labs/catalog-spring-boot \
+    --param APP_GIT_REVISION=${GIT_BRANCH} \
     --param NAMESPACE=${NAMESPACE}
 
 tkn pipeline start coolstore-dotnet-pipeline -n ${NAMESPACE} \
@@ -19,6 +21,7 @@ tkn pipeline start coolstore-dotnet-pipeline -n ${NAMESPACE} \
     --param APP_NAME=gateway \
     --param APP_GIT_URL=https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git \
     --param APP_GIT_CONTEXT=labs/gateway-dotnet \
+    --param APP_GIT_REVISION=${GIT_BRANCH} \
     --param NAMESPACE=${NAMESPACE}
 
 tkn pipeline start coolstore-nodejs-pipeline -n ${NAMESPACE} \
@@ -27,6 +30,7 @@ tkn pipeline start coolstore-nodejs-pipeline -n ${NAMESPACE} \
     --param APP_NAME=web \
     --param APP_GIT_URL=https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git \
     --param APP_GIT_CONTEXT=labs/web-nodejs \
+    --param APP_GIT_REVISION=${GIT_BRANCH} \
     --param NAMESPACE=${NAMESPACE}
 
 while [ $(tkn pipelinerun list -n ${NAMESPACE} --no-headers | grep -i "running" | wc -l) -gt 0 ]

@@ -11,6 +11,8 @@ spec:
       type: string
     - name: APP_GIT_CONTEXT
       type: string
+    - name: APP_GIT_REVISION
+      type: string
     - name: NAMESPACE
       type: string
   tasks:
@@ -26,6 +28,8 @@ spec:
           value: 'true'
         - name: deleteExisting
           value: 'true'
+        - name: revision
+          value: $(params.APP_GIT_REVISION)
       taskRef:
         kind: ClusterTask
         name: git-clone
