@@ -3,7 +3,7 @@
 PROJECT_NAME=$1
 APPS_HOSTNAME_SUFFIX=$(oc whoami --show-console | sed 's%.*\(apps.*\)$%\1%g')
 
-url=http://ingressgateway-${PROJECT_NAME}.${APPS_HOSTNAME_SUFFIX}/api/products
+url=http://istio-ingressgateway-${PROJECT_NAME}.${APPS_HOSTNAME_SUFFIX}/api/products
 
 while true; do 
     if curl -s ${url} | grep -q OFFICIAL

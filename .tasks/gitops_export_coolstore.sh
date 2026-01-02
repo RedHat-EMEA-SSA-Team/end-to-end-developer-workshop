@@ -125,7 +125,6 @@ do
         yq write --inplace ${DEPLOYMENTCONFIG_YAML} items[*].spec.selector.app ${COMPONENT_NAME%-coolstore}
         yq write --inplace ${DEPLOYMENTCONFIG_YAML} items[*].spec.template.metadata.labels.app ${COMPONENT_NAME%-coolstore}
         yq write --inplace ${DEPLOYMENTCONFIG_YAML} items[*].spec.template.metadata.labels.[app.kubernetes.io/instance] ${COMPONENT_NAME%-coolstore}
-        yq write --inplace ${DEPLOYMENTCONFIG_YAML} items[*].spec.template.metadata.labels.[maistra.io/expose-route] '"true"'
 
         sed -i "s/  envFrom:/- envFrom:/g"  ${DEPLOYMENTCONFIG_YAML}
         grep '\- envFrom:' ${DEPLOYMENTCONFIG_YAML} &> /dev/null || sed -i "s/  image:/- image:/g"  ${DEPLOYMENTCONFIG_YAML}
@@ -164,7 +163,6 @@ do
         yq write --inplace ${DEPLOYMENT_YAML} items[*].spec.selector.matchLabels.app ${COMPONENT_NAME%-coolstore}
         yq write --inplace ${DEPLOYMENT_YAML} items[*].spec.template.metadata.labels.app ${COMPONENT_NAME%-coolstore}
         yq write --inplace ${DEPLOYMENT_YAML} items[*].spec.template.metadata.labels.[app.kubernetes.io/instance] ${COMPONENT_NAME%-coolstore}
-        yq write --inplace ${DEPLOYMENT_YAML} items[*].spec.template.metadata.labels.[maistra.io/expose-route] '"true"'
 
         sed -i "s/  envFrom:/- envFrom:/g"  ${DEPLOYMENT_YAML}
         grep '\- envFrom:' ${DEPLOYMENT_YAML} &> /dev/null || sed -i "s/  image:/- image:/g"  ${DEPLOYMENT_YAML}
