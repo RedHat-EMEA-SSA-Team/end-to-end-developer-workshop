@@ -12,7 +12,7 @@ tkn pipeline start coolstore-java-pipeline -n ${NAMESPACE} \
     --param APP_NAME=catalog \
     --param APP_GIT_URL=https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git \
     --param APP_GIT_CONTEXT=labs/catalog-spring-boot \
-    --param APP_GIT_REVISION=${GIT_BRANCH} \
+    --param APP_GIT_REVISION=completed \
     --param NAMESPACE=${NAMESPACE}
 
 tkn pipeline start coolstore-dotnet-pipeline -n ${NAMESPACE} \
