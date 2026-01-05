@@ -167,7 +167,7 @@ commands:
       workingDir: /projects/workshop/.tasks
     id: gitops---commit--configure-coolstore
   - exec:
-      commandLine: 'oc patch deployment/catalog-coolstore --patch ''{"spec": {"template": {"metadata": {"annotations": {"sidecar.istio.io/inject": "true"}}}'' -n cn-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-13} && oc patch deployment/gateway-coolstore --patch ''{"spec": {"template": {"metadata": {"annotations": {"sidecar.istio.io/inject": "true"}}}'' -n cn-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-13} '
+      commandLine: 'oc patch deployment/catalog-coolstore --patch ''{"spec": {"template": {"metadata": {"labels": {"sidecar.istio.io/inject": "true"}}}'' -n cn-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-13} && oc patch deployment/gateway-coolstore --patch ''{"spec": {"template": {"metadata": {"labels": {"sidecar.istio.io/inject": "true"}}}'' -n cn-project${DEVWORKSPACE_NAMESPACE:4:${#DEVWORKSPACE_NAMESPACE}-13} '
       component: workshop-tools
       label: Service Mesh - Deploy Catalog and Gateway
       workingDir: /projects/workshop/labs
