@@ -6,7 +6,7 @@ projects:
       source-origin: branch
     git:
       checkoutFrom:
-        revision: '6.10'
+        revision: '6.11'
       remotes:
         origin: 'https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git'
     name: workshop
