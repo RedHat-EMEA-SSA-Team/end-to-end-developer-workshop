@@ -102,8 +102,9 @@ spec:
           value: 'false'
         - name: MAVEN_CLEAR_REPO
           value: 'false'
-        - name: BUILD_ARGS
-          value: "MAVEN_MIRROR_URL=http://nexus.opentlc-shared.svc:8081/repository/maven-all-public"
+        - name: ENV_VARS
+          value: 
+            - "MAVEN_MIRROR_URL=http://nexus.opentlc-shared.svc:8081/repository/maven-all-public"
         - name: IMAGE
           value: >-
             image-registry.openshift-image-registry.svc:5000/cn-project${USER_ID}/inventory-coolstore
