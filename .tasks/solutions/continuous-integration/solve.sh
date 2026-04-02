@@ -53,23 +53,27 @@ spec:
   tasks:
     - name: git-clone
       params:
-        - name: url
+        - name: URL
           value: 'http://gitea-server.gitea.svc:3000/user${USER_ID}/inventory-quarkus.git'
-        - name: revision
-          value: master
-        - name: submodules
+        - name: SUBMODULES
           value: 'true'
-        - name: depth
+        - name: DEPTH
           value: '1'
-        - name: sslVerify
+        - name: SSL_VERIFY
           value: 'true'
-        - name: deleteExisting
+        - name: DELETE_EXISTING
           value: 'true'
-        - name: verbose
-          value: 'true'
+        - name: REVISION
+          value: master
       taskRef:
-        kind: ClusterTask
-        name: git-clone
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines
+        resolver: cluster
       workspaces:
         - name: output
           workspace: shared-workspace
@@ -77,22 +81,30 @@ spec:
       params:
         - name: VERSION
           value: openjdk-21-ubi8
-        - name: PATH_CONTEXT
+        - name: CONTEXT
           value: .
-        - name: TLSVERIFY
+        - name: TLS_VERIFY
           value: 'false'
         - name: MAVEN_CLEAR_REPO
           value: 'false'
-        - name: MAVEN_MIRROR_URL
-          value: 'http://nexus.opentlc-shared.svc:8081/repository/maven-all-public'
+        - name: BUILD_ARGS
+          value: |
+            MAVEN_MIRROR_URL=http://nexus.opentlc-shared.svc:8081/repository/maven-all-public
+            MAVEN_CLEAR_REPO=true
         - name: IMAGE
           value: >-
             image-registry.openshift-image-registry.svc:5000/cn-project${USER_ID}/inventory-coolstore
       runAfter:
         - git-clone
       taskRef:
-        kind: ClusterTask
-        name: s2i-java
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: s2i-java
+          - name: namespace
+            value: openshift-pipelines
+        resolver: cluster
       workspaces:
         - name: source
           workspace: shared-workspace

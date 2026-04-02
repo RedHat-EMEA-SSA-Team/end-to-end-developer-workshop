@@ -11,28 +11,34 @@ spec:
       type: string
     - name: APP_GIT_CONTEXT
       type: string
-    - name: APP_GIT_REVISION
-      type: string
     - name: NAMESPACE
+      type: string
+    - name: APP_GIT_REVISION
       type: string
   tasks:
     - name: git-clone
       params:
-        - name: url
+        - name: URL
           value: $(params.APP_GIT_URL)
-        - name: revision
+        - name: REVISION
           value: $(params.APP_GIT_REVISION)
-        - name: submodules
+        - name: SUBMODULES
           value: 'true'
-        - name: depth
+        - name: DEPTH
           value: '1'
-        - name: sslVerify
+        - name: SSL_VERIFY
           value: 'true'
-        - name: deleteExisting
+        - name: DELETE_EXISTING
           value: 'true'
       taskRef:
-        kind: ClusterTask
-        name: git-clone
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines
+        resolver: cluster
       workspaces:
         - name: output
           workspace: shared-workspace
@@ -40,22 +46,28 @@ spec:
       params:
         - name: VERSION
           value: openjdk-21-ubi8
-        - name: PATH_CONTEXT
+        - name: CONTEXT
           value: $(params.APP_GIT_CONTEXT)
-        - name: TLSVERIFY
+        - name: TLS_VERIFY
           value: 'false'
-        - name: MAVEN_CLEAR_REPO
-          value: 'false'
-        - name: MAVEN_MIRROR_URL
-          value: 'http://nexus.opentlc-shared.svc:8081/repository/maven-all-public'
+        - name: BUILD_ARGS
+          value: |
+            MAVEN_MIRROR_URL=http://nexus.opentlc-shared.svc:8081/repository/maven-all-public
+            MAVEN_CLEAR_REPO=true
         - name: IMAGE
           value: >-
             image-registry.openshift-image-registry.svc:5000/$(params.NAMESPACE)/$(params.APP_NAME)-coolstore
       runAfter:
         - git-clone
       taskRef:
-        kind: ClusterTask
-        name: s2i-java
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: s2i-java
+          - name: namespace
+            value: openshift-pipelines
+        resolver: cluster
       workspaces:
         - name: source
           workspace: shared-workspace
@@ -75,7 +87,14 @@ spec:
       runAfter:
         - argocd-task-sync-and-wait
       taskRef:
-        kind: ClusterTask
-        name: openshift-client
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: openshift-client
+          - name: namespace
+            value: openshift-pipelines
+        resolver: cluster
   workspaces:
     - name: shared-workspace
+

@@ -11,28 +11,34 @@ spec:
       type: string
     - name: APP_GIT_CONTEXT
       type: string
-    - name: APP_GIT_REVISION
-      type: string
     - name: NAMESPACE
+      type: string
+    - name: APP_GIT_REVISION
       type: string
   tasks:
     - name: git-clone
       params:
-        - name: url
+        - name: URL
           value: $(params.APP_GIT_URL)
-        - name: submodules
-          value: 'true'
-        - name: depth
-          value: '1'
-        - name: sslVerify
-          value: 'true'
-        - name: deleteExisting
-          value: 'true'
-        - name: revision
+        - name: REVISION
           value: $(params.APP_GIT_REVISION)
+        - name: SUBMODULES
+          value: 'true'
+        - name: DEPTH
+          value: '1'
+        - name: SSL_VERIFY
+          value: 'true'
+        - name: DELETE_EXISTING
+          value: 'true'
       taskRef:
-        kind: ClusterTask
-        name: git-clone
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines
+        resolver: cluster
       workspaces:
         - name: output
           workspace: shared-workspace
@@ -43,9 +49,9 @@ spec:
             registry.redhat.io/rhel8/buildah@sha256:99cae35f40c7ec050fed3765b2b27e0b8bbea2aa2da7c16408e2ca13c60ff8ee
         - name: VERSION
           value: "9.0"
-        - name: PATH_CONTEXT
+        - name: CONTEXT
           value: labs/gateway-dotnet
-        - name: TLSVERIFY
+        - name: TLS_VERIFY
           value: 'false'
         - name: IMAGE
           value: >-
@@ -53,8 +59,14 @@ spec:
       runAfter:
         - git-clone
       taskRef:
-        kind: ClusterTask
-        name: s2i-dotnet
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: s2i-dotnet
+          - name: namespace
+            value: openshift-pipelines
+        resolver: cluster
       workspaces:
         - name: source
           workspace: shared-workspace
@@ -74,7 +86,14 @@ spec:
       runAfter:
         - argocd-task-sync-and-wait
       taskRef:
-        kind: ClusterTask
-        name: openshift-client
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: openshift-client
+          - name: namespace
+            value: openshift-pipelines
+        resolver: cluster
   workspaces:
     - name: shared-workspace
+
