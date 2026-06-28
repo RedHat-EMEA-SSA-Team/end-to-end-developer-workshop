@@ -46,7 +46,7 @@
   },
   "homepage": "https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop#readme",
   "devDependencies": {
-    "js-yaml": "~3.13.1",
+    "js-yaml": "~4.2.0",
     "nodeshift": "~3.0.0",
     "nyc": "~14.1.0",
     "proxyquire": "^2.0.0",
